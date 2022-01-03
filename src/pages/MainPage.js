@@ -98,6 +98,7 @@ function MainPage() {
       .then((data) => {
         setIsLoading(false);
         setLoadedWehicle(data);
+        console.log(data);
       });
   }, [setIsLoading, setLoadedWehicle]);
 

@@ -7,43 +7,10 @@ function NewWehicle(props) {
   const [marka, setMarka] = useState("");
   const [model, setModel] = useState("");
   const [nrrejestracyjny, setnrrejestracyjny] = useState("");
-  const [zdjecie, setZdjecie] = useState(null);
-
-  /*const [marka, setMarka] = useState("");
-  const [marka, setMarka] = useState("");
-  const [marka, setMarka] = useState("");
-  const [marka, setMarka] = useState("");
-  const [marka, setMarka] = useState("");
-  const [marka, setMarka] = useState("");
-
-
-  const markaInputRef = useRef();
-  const modelInputRef = useRef();
-  const nrrejestracyjnyInputRef = useRef();
-  const rodzajpojazduInputRef = useRef();
-  const rodzajpaliwaInputRef = useRef();
-  const silnikInputRef = useRef();
-  const vinInputRef = useRef();
-  const databadaniaInputRef = useRef();
-  const dataubezpieczeniaInputRef = useRef();
-  const zdjecieInputRef = useRef();
-  const przebiegInputRef = useRef();*/
+  const [zdjecie, setZdjecie] = useState("");
 
   function submitHandler(event) {
     event.preventDefault();
-
-    /* const enteredMarka = markaInputRef.current.value;
-     const enteredModel = modelInputRef.current.value;
-     const enteredRejestracyjny = nrrejestracyjnyInputRef.current.value;
-     const enteredRodzaj = rodzajpojazduInputRef.current.value;
-     const enteredRodzajPaliwa = rodzajpaliwaInputRef.current.value;
-     const enteredSilnik = silnikInputRef.current.value;
-     const enteredVin = vinInputRef.current.value;
-     const enteredDataBadania = databadaniaInputRef.current.value;
-     const enteredDataUbezpieczenia = dataubezpieczeniaInputRef.current.value;
-     const enteredZdjecie = zdjecieInputRef.current.value;
-     const enteredPrzebieg = przebiegInputRef.current.value;*/
-
 
     const wehicleData = {
       marka: marka,
@@ -51,9 +18,6 @@ function NewWehicle(props) {
       nrrejestracyjny: nrrejestracyjny,
       zdjecie: zdjecie
     };
-    /*
-        console.log(wehicleData);
-    */
 
     const formData = new FormData();
     formData.append("marka", marka);
@@ -61,14 +25,12 @@ function NewWehicle(props) {
     formData.append("nrrejestracyjny", nrrejestracyjny);
     formData.append("file", zdjecie);
 
-/*
-    for (var value of formData.values()) {}
-*/
 
     fetch('http://localhost:8000/api/addCar', {
       method: "POST",
       body: formData,
       headers: {
+        Accept: 'application/form-data',
         "token" : localStorage.getItem("token")
       },
     }).then((response) => {
@@ -217,8 +179,7 @@ function NewWehicle(props) {
                       className="form-control-file"
                       id="zdjecie"
                       name="zdjecie"
-                      value={zdjecie}
-                      onChange={(event) => setZdjecie(prev => prev=event.target.value) }
+                      onChange={(event) => setZdjecie(event.target.files[0]) }
                     />
                   </div>
                   <div className="m-0 text-center">

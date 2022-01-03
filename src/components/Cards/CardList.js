@@ -10,7 +10,7 @@ function CardList(props) {
             <CardItem
               key={card.id}
               id={card.id}
-              image={card.image}
+              image={card.zdjecie}
               nr_rejestracyjny={card.nr_rejestracyjny}
               marka={card.marka}
               model={card.model}
