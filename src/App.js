@@ -1,13 +1,18 @@
-import LoginForm from "../src/pages/LoginForm";
-import MainPage from "../src/pages/MainPage"
-import {Routes, Route} from "react-router-dom"
+import Login from "../src/pages/Login";
+import MainPage from "../src/pages/MainPage";
+import { Routes, Route } from "react-router-dom";
+import Layout from "../src/components/layout/Layout";
+import NewWehicle from "./components/Forms/NewWehicle";
 
 function App() {
   return (
-    <Routes>
-       <Route path="/" element={<LoginForm />}></Route>      
-       <Route path="/Flota" element={<MainPage />}></Route> 
-    </Routes>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Login />}></Route>
+        <Route path="/Flota" element={<MainPage />}></Route>
+        <Route path="/Flota/AddWehicle" element={<NewWehicle />}></Route>
+      </Routes>
+    </Layout>
   );
 }
 

@@ -1,0 +1,23 @@
+.cardImgTop {
+  border-radius: 10px 10px 0px 0px !important;
+}
+.cardBody {
+  padding: 0;
+}
+.cardTitle {
+  text-align: center;
+
+  background-color: #0db5c9;
+
+  font-size: 16px;
+
+  color: white;
+
+  padding: 10px;
+}
+.cardText {
+  padding: 10px 0 10px 0;
+  font-weight: bold;
+  text-align: center;
+  color: black;
+}

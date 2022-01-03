@@ -1,6 +1,6 @@
 /*    //   ALL START   \\     */
 
-  body {
+/* body {
   font-family: "Roboto", sans-serif !important;
 
   cursor: url("/src/images/kursor.png"), auto !important;
@@ -10,11 +10,10 @@
 .container-fluid {
   font-size: calc(6px + 6 * ((100vw - 320px) / 680));
   font-family: "Roboto";
-}
+} */
 
 .card_list {
-  padding:50px;
-
+  padding: 50px;
 }
 /* scrollbar */
 
@@ -97,7 +96,7 @@
   background-size: cover; /* Resize the background image to cover the entire container */
   padding-top: 20px;
   height: auto;
-  overflow: auto;
+  /* overflow: auto; */
   direction: rtl;
 
   /* background: rgb(0, 0, 0); */
@@ -105,37 +104,7 @@
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
-.sidebar-cnt {
-  direction: ltr;
-}
-.sidebar-profile-container,
-.line-hr,
-.sidebar-menu-wrapper,
-a {
-  z-index: 2;
-}
 
-.sidebar-profile-img {
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.sidebar-profile-img img {
-  object-fit: cover;
-  border-radius: 50%;
-  height: 100px;
-  width: 100px;
-}
-.sidebar-company-title,
-.sidebar-your-name {
-  color: white;
-  font-weight: 300;
-}
-.select-company {
-  color: white !important;
-}
 #adm {
   font-size: 12px;
   padding-bottom: 10px;
@@ -160,23 +129,6 @@ a {
   border-radius: 100%;
 
   font-family: "Roboto";
-}
-
-.sidebar-company-title select:focus {
-  outline: 0 !important  ;
-  border: 0 !important;
-}
-
-.sidebar-company-title select option {
-  color: white;
-
-  background-color: black;
-}
-
-.sidebar-profile-container .sidebar-your-role {
-  color: white;
-
-  font-style: oblique;
 }
 
 .sidebar-menu-wrapper {
@@ -255,20 +207,6 @@ select {
 
 .sidebar-menu-wrapper .sidebar-menu-item a:hover .ikona_menu {
   margin-right: 5px;
-}
-
-.sidebar-menu-item .active {
-  background-color: #0db5c9;
-
-  border-radius: 10px;
-}
-
-.sidebar-menu-wrapper li:not(:last-child) {
-  margin-bottom: 2px;
-}
-
-.sidebar-menu-wrapper li:last-child {
-  margin-top: 10px;
 }
 
 /* mobile sidebar */
@@ -395,33 +333,6 @@ select {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
   margin-bottom: 30px !important;
-}
-
-.card-img-top {
-  border-radius: 10px 10px 0px 0px !important;
-}
-
-.card-title {
-  text-align: center;
-
-  background-color: #0db5c9;
-
-  font-size: 16px;
-
-  color: white;
-
-  padding: 10px;
-}
-
-.card-body {
-  padding: 0;
-}
-
-.card-text {
-  padding: 10px 0 10px 0;
-  font-weight: bold;
-  text-align: center;
-  color: black;
 }
 
 .card a:hover {
@@ -577,7 +488,7 @@ span {
   display: inline-block;
 }
 .first-box {
-  overflow: auto;
+  /* overflow: auto; */
 }
 .container {
   display: block;
@@ -686,10 +597,7 @@ span {
   overflow: auto;
   height: 100vh;
 }
-.page {
-  overflow: auto;
-  height: 100vh;
-}
+
 /* simple_car.css */
 
 .container-fluid {
@@ -799,8 +707,8 @@ p {
 }
 
 .page {
-  overflow: auto;
-  height: 100vh;
+  /* overflow: auto; */
+  /* height: 100vh; */
 }
 
 /* tabele nav*/

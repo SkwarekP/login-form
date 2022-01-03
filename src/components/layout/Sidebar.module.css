@@ -1,0 +1,32 @@
+.sidebarCnt {
+  direction: ltr;
+}
+.lineHr,
+.sidebar-menu-wrapper,
+a {
+  z-index: 2;
+}
+.sidebarProfileContainer .sidebar-your-role {
+  color: white;
+
+  font-style: oblique;
+  z-index: 2;
+}
+.sidebarProfileImg {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebarProfileImg img {
+  object-fit: cover;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+}
+.sidebarYourName {
+  color: white;
+  font-weight: 300;
+  text-align: center;
+}
