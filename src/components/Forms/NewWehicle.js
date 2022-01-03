@@ -1,9 +1,22 @@
 import { Container, Row, Col, Card } from "react-bootstrap";
 import Sidebar from "../layout/Sidebar";
-import { useRef } from "react";
+import { useState} from "react";
 import classes from "./NewWehicle.module.css";
 
 function NewWehicle(props) {
+  const [marka, setMarka] = useState("");
+  const [model, setModel] = useState("");
+  const [nrrejestracyjny, setnrrejestracyjny] = useState("");
+  const [zdjecie, setZdjecie] = useState(null);
+
+  /*const [marka, setMarka] = useState("");
+  const [marka, setMarka] = useState("");
+  const [marka, setMarka] = useState("");
+  const [marka, setMarka] = useState("");
+  const [marka, setMarka] = useState("");
+  const [marka, setMarka] = useState("");
+
+
   const markaInputRef = useRef();
   const modelInputRef = useRef();
   const nrrejestracyjnyInputRef = useRef();
@@ -14,38 +27,53 @@ function NewWehicle(props) {
   const databadaniaInputRef = useRef();
   const dataubezpieczeniaInputRef = useRef();
   const zdjecieInputRef = useRef();
-  const przebiegInputRef = useRef();
+  const przebiegInputRef = useRef();*/
 
   function submitHandler(event) {
     event.preventDefault();
 
-    const enteredMarka = markaInputRef.current.value;
-    const enteredModel = modelInputRef.current.value;
-    const enteredRejestracyjny = nrrejestracyjnyInputRef.current.value;
-    const enteredRodzaj = rodzajpojazduInputRef.current.value;
-    const enteredRodzajPaliwa = rodzajpaliwaInputRef.current.value;
-    const enteredSilnik = silnikInputRef.current.value;
-    const enteredVin = vinInputRef.current.value;
-    const enteredDataBadania = databadaniaInputRef.current.value;
-    const enteredDataUbezpieczenia = dataubezpieczeniaInputRef.current.value;
-    const enteredZdjecie = zdjecieInputRef.current.value;
-    const enteredPrzebieg = przebiegInputRef.current.value;
+    /* const enteredMarka = markaInputRef.current.value;
+     const enteredModel = modelInputRef.current.value;
+     const enteredRejestracyjny = nrrejestracyjnyInputRef.current.value;
+     const enteredRodzaj = rodzajpojazduInputRef.current.value;
+     const enteredRodzajPaliwa = rodzajpaliwaInputRef.current.value;
+     const enteredSilnik = silnikInputRef.current.value;
+     const enteredVin = vinInputRef.current.value;
+     const enteredDataBadania = databadaniaInputRef.current.value;
+     const enteredDataUbezpieczenia = dataubezpieczeniaInputRef.current.value;
+     const enteredZdjecie = zdjecieInputRef.current.value;
+     const enteredPrzebieg = przebiegInputRef.current.value;*/
+
 
     const wehicleData = {
-      marka: enteredMarka,
-      model: enteredModel,
-      nrrejestracyjny: enteredRejestracyjny,
-      rodzajpojazdu: enteredRodzaj,
-      rodzajpaliwa: enteredRodzajPaliwa,
-      silnik: enteredSilnik,
-      vin: enteredVin,
-      przebieg: enteredPrzebieg,
-      databadania: enteredDataBadania,
-      dataubezpieczenia: enteredDataUbezpieczenia,
-      zdjecie: enteredZdjecie,
+      marka: marka,
+      model: model,
+      nrrejestracyjny: nrrejestracyjny,
+      zdjecie: zdjecie
     };
-    console.log(wehicleData);
-    // props.onAddWehicle(wehicleData);
+    /*
+        console.log(wehicleData);
+    */
+
+    const formData = new FormData();
+    formData.append("marka", marka);
+    formData.append("model", model);
+    formData.append("nrrejestracyjny", nrrejestracyjny);
+    formData.append("file", zdjecie);
+
+/*
+    for (var value of formData.values()) {}
+*/
+
+    fetch('http://localhost:8000/api/addCar', {
+      method: "POST",
+      body: formData,
+      headers: {
+        "token" : localStorage.getItem("token")
+      },
+    }).then((response) => {
+      return response.json();
+    }).then((x) => console.log(x))
   }
 
   return (
@@ -77,8 +105,10 @@ function NewWehicle(props) {
                       type="text"
                       className="form-control"
                       id="marka"
-                      ref={markaInputRef}
-                    ></input>
+                      name="marka"
+                      value={marka}
+                      onChange={(event) => setMarka(prev => prev=event.target.value) }
+                    />
                   </div>
                   <div className="form-group">
                     <label htmlFor="model">Model</label>
@@ -86,8 +116,10 @@ function NewWehicle(props) {
                       type="text"
                       className="form-control"
                       id="model"
-                      ref={modelInputRef}
-                    ></input>
+                      name="model"
+                      value={model}
+                      onChange={(event) => setModel(prev => prev=event.target.value) }
+                    />
                   </div>
                   <div className="form-group">
                     <label htmlFor="nrrejestracyjny">Numer rejestracyjny</label>
@@ -95,10 +127,12 @@ function NewWehicle(props) {
                       type="text"
                       className="form-control"
                       id="nrrejestracyjny"
-                      ref={nrrejestracyjnyInputRef}
-                    ></input>
+                      name="nrrejestracyjny"
+                      value={nrrejestracyjny}
+                      onChange={(event) => setnrrejestracyjny(prev => prev=event.target.value) }
+                    />
                   </div>
-                  <div className="form-group">
+                  {/*<div className="form-group">
                     <label htmlFor="rodzajpojazdu">Rodzaj Pojazdu</label>
                     <select
                       className="form-control"
@@ -128,7 +162,7 @@ function NewWehicle(props) {
                       className="form-control"
                       id="silnik"
                       ref={silnikInputRef}
-                    ></input>
+                    />
                   </div>
                 </Col>
               </Row>
@@ -141,7 +175,7 @@ function NewWehicle(props) {
                       className="form-control"
                       id="vin"
                       ref={vinInputRef}
-                    ></input>
+                    />
                   </div>
                   <div className="form-group">
                     <label htmlFor="vin">Przebieg pojazdu</label>
@@ -150,7 +184,7 @@ function NewWehicle(props) {
                       className="form-control"
                       id="przebieg"
                       ref={przebiegInputRef}
-                    ></input>
+                    />
                   </div>
                   <div className="form-group">
                     <label htmlFor="databadania">
@@ -162,7 +196,7 @@ function NewWehicle(props) {
                       name="databadania"
                       id="databadania"
                       ref={databadaniaInputRef}
-                    ></input>
+                    />
                   </div>
                   <div className="form-group">
                     <label htmlFor="dataubezpieczenia">
@@ -174,19 +208,22 @@ function NewWehicle(props) {
                       name="dataubezpieczenia"
                       id="dataubezpieczenia"
                       ref={dataubezpieczeniaInputRef}
-                    ></input>
-                  </div>
+                    />
+                  </div>*/}
                   <div className="form-group mb-5">
                     <label htmlFor="zdjecie">Wybierz zdjecie:</label>
                     <input
                       type="file"
                       className="form-control-file"
                       id="zdjecie"
-                      ref={zdjecieInputRef}
-                    ></input>
+                      name="zdjecie"
+                      value={zdjecie}
+                      onChange={(event) => setZdjecie(prev => prev=event.target.value) }
+                    />
                   </div>
                   <div className="m-0 text-center">
                     <button
+                        type="submit"
                       className="btn btn-primary text-center"
                       style={{ width: "200px" }}
                     >
