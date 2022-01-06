@@ -1,41 +1,78 @@
 import { Container, Row, Col, Card } from "react-bootstrap";
 import Sidebar from "../layout/Sidebar";
-import { useState} from "react";
-import classes from "./NewWehicle.module.css";
+import { useState, useEffect, useReducer} from "react";
+
+const markaReducer = (state, action) => {
+  if(action.type === "MARKA") {
+    return {value: action.val, isValid: action.val.trim().length >= 3}
+  }
+  return {value: "" , isValid: false}
+}
 
 function NewWehicle(props) {
   const [marka, setMarka] = useState("");
   const [model, setModel] = useState("");
   const [nrrejestracyjny, setnrrejestracyjny] = useState("");
   const [zdjecie, setZdjecie] = useState("");
+  const [rodzajpojazdu, setRodzajPojazdu] = useState("");
+  const [rodzajpaliwa, setRodzajPaliwa] = useState("");
+  const [silnik, setSilnik] = useState("");
+  const [vin, setVin] = useState("");
+  const [przebieg, setPrzebieg] = useState("");
+  const [databadania, setDataBadania] = useState("");
+  const [dataubezpieczenia, setDataUbezpieczenia] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  const [markaState, dispatchMarka] = useReducer(markaReducer, {
+    value: "",
+    isValid: null,
+  })
+
+  useEffect(() => {
+    const identifier = setTimeout(() =>{
+      console.log("checking form validity");
+      setIsFormValid(
+          markaState.isValid
+      )
+    }, 500)
+
+    return () => {
+      console.log("cleanup")
+      clearTimeout(identifier);
+    }
+  }, [markaState])
+
+
 
   function submitHandler(event) {
     event.preventDefault();
 
-    const wehicleData = {
-      marka: marka,
-      model: model,
-      nrrejestracyjny: nrrejestracyjny,
-      zdjecie: zdjecie
-    };
-
     const formData = new FormData();
-    formData.append("marka", marka);
+    formData.append("marka", markaState.value);
     formData.append("model", model);
     formData.append("nrrejestracyjny", nrrejestracyjny);
+    formData.append("rodzajpojazdu", rodzajpojazdu)
+    formData.append("rodzajpaliwa", rodzajpaliwa)
+    formData.append("silnik", silnik)
+    formData.append("vin", vin)
+    formData.append("przebieg", przebieg)
+    formData.append("databadania", databadania)
+    formData.append("dataubezpieczenia", dataubezpieczenia)
     formData.append("file", zdjecie);
 
-
-    fetch('http://localhost:8000/api/addCar', {
-      method: "POST",
-      body: formData,
-      headers: {
-        Accept: 'application/form-data',
-        "token" : localStorage.getItem("token")
-      },
-    }).then((response) => {
-      return response.json();
-    }).then((x) => console.log(x))
+    console.log(isFormValid);
+    if (isFormValid) {
+      fetch('http://localhost:8000/api/addCar', {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: 'application/form-data',
+          "token": localStorage.getItem("token")
+        },
+      }).then((response) => {
+        return response.json();
+      })
+    }
   }
 
   return (
@@ -68,9 +105,12 @@ function NewWehicle(props) {
                       className="form-control"
                       id="marka"
                       name="marka"
-                      value={marka}
-                      onChange={(event) => setMarka(prev => prev=event.target.value) }
+                      value={markaState.value}
+                      onChange={(event) => {
+                        dispatchMarka({type: "MARKA", val:event.target.value})
+                      }}
                     />
+                    {markaState.value}
                   </div>
                   <div className="form-group">
                     <label htmlFor="model">Model</label>
@@ -94,12 +134,14 @@ function NewWehicle(props) {
                       onChange={(event) => setnrrejestracyjny(prev => prev=event.target.value) }
                     />
                   </div>
-                  {/*<div className="form-group">
+                  <div className="form-group">
                     <label htmlFor="rodzajpojazdu">Rodzaj Pojazdu</label>
                     <select
                       className="form-control"
                       id="rodzajpojazdu"
-                      ref={rodzajpojazduInputRef}
+                      name="rodzajpojazdu"
+                      value={rodzajpojazdu}
+                      onChange={(event) => setRodzajPojazdu(prev => prev=event.target.value) }
                     >
                       <option>Osobowy</option>
                       <option>Dostawczy</option>
@@ -111,7 +153,9 @@ function NewWehicle(props) {
                     <select
                       className="form-control"
                       id="rodzajpaliwa"
-                      ref={rodzajpaliwaInputRef}
+                      name="rodzajpaliwa"
+                      value={rodzajpaliwa}
+                      onChange={(event) => setRodzajPaliwa(prev => prev=event.target.value) }
                     >
                       <option>Benzyna</option>
                       <option>Diesel</option>
@@ -123,7 +167,9 @@ function NewWehicle(props) {
                       type="text"
                       className="form-control"
                       id="silnik"
-                      ref={silnikInputRef}
+                      name="silnik"
+                      value={silnik}
+                      onChange={(event) => setSilnik(prev => prev=event.target.value) }
                     />
                   </div>
                 </Col>
@@ -136,7 +182,9 @@ function NewWehicle(props) {
                       type="text"
                       className="form-control"
                       id="vin"
-                      ref={vinInputRef}
+                      name="vin"
+                      value={vin}
+                      onChange={(event) => setVin(prev => prev=event.target.value) }
                     />
                   </div>
                   <div className="form-group">
@@ -145,7 +193,9 @@ function NewWehicle(props) {
                       type="text"
                       className="form-control"
                       id="przebieg"
-                      ref={przebiegInputRef}
+                      name="przebieg"
+                      value={przebieg}
+                      onChange={(event) => setPrzebieg(prev => prev=event.target.value) }
                     />
                   </div>
                   <div className="form-group">
@@ -155,23 +205,25 @@ function NewWehicle(props) {
                     <input
                       type="date"
                       className="form-control"
-                      name="databadania"
                       id="databadania"
-                      ref={databadaniaInputRef}
+                      name="databadania"
+                      value={databadania}
+                      onChange={(event) => setDataBadania(prev => prev=event.target.value) }
                     />
                   </div>
                   <div className="form-group">
                     <label htmlFor="dataubezpieczenia">
-                      Data kupienia ubezpieczenia
+                      Data kupna ubezpieczenia
                     </label>
                     <input
                       type="date"
                       className="form-control"
-                      name="dataubezpieczenia"
                       id="dataubezpieczenia"
-                      ref={dataubezpieczeniaInputRef}
+                      name="dataubezpieczenia"
+                      value={dataubezpieczenia}
+                      onChange={(event) => setDataUbezpieczenia(prev => prev=event.target.value) }
                     />
-                  </div>*/}
+                  </div>
                   <div className="form-group mb-5">
                     <label htmlFor="zdjecie">Wybierz zdjecie:</label>
                     <input

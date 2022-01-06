@@ -2,8 +2,7 @@ import { Button, Col, Row, Container } from "react-bootstrap";
 import Sidebar from "../components/layout/Sidebar";
 import CardList from "../components/Cards/CardList";
 import SearchBox from "../components/Searchbox";
-import style from "../style/style.css";
-import img from "../images/bmw.jpg";
+import '../style/style.css'
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -119,7 +118,7 @@ function MainPage() {
         <Container>
           <Row>
             <Col xs={12} className="mt-3">
-              <div class="ml-3">
+              <div className="ml-3">
                 <h1>PME FLOTA</h1>
               </div>
               <Button variant="primary" onClick={addNewWehicle}>

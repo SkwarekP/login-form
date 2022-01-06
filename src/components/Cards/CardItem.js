@@ -5,7 +5,7 @@ function CardItem(props) {
   return (
     <Col xs={12} sm={12} md={4} lg={4} xl={4}>
       <Card>
-        <img src={props.image} className={classes.cardImgTop} alt="..."></img>
+        <img src={props.image} className={classes.cardImgTop} alt="..."/>
         <div className={classes.cardBody}>
           <h5 className={classes.cardTitle}> {props.nr_rejestracyjny}</h5>
           <p className={classes.cardText}>

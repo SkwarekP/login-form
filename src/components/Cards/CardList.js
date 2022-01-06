@@ -1,4 +1,4 @@
-import { Col, Row, CardGroup, Card } from "react-bootstrap";
+import { Col, Row, CardGroup } from "react-bootstrap";
 import CardItem from "./CardItem";
 
 function CardList(props) {
@@ -11,7 +11,7 @@ function CardList(props) {
               key={card.id}
               id={card.id}
               image={card.zdjecie}
-              nr_rejestracyjny={card.nr_rejestracyjny}
+              nr_rejestracyjny={card.nrrejestracyjny}
               marka={card.marka}
               model={card.model}
             />
