@@ -1,38 +1,105 @@
 import { Container, Row, Col, Card } from "react-bootstrap";
 import Sidebar from "../layout/Sidebar";
 import { useState, useEffect, useReducer} from "react";
+import classes from './NewWehicle.module.css'
 
-const markaReducer = (state, action) => {
-  if(action.type === "MARKA") {
-    return {value: action.val, isValid: action.val.trim().length >= 3}
+const modelReducer = (state, action) => {
+  if(action.type === "MODEL") {
+    return {value: action.val, isValid: action.val.trim().length > 1, validMessage: "Model nie istnieje"}
   }
-  return {value: "" , isValid: false}
+  return {value: "", isValid: false}
+
+}
+const nrRejestracyjnyReducer = (state, action) => {
+  if(action.type === "NRREJ"){
+    return {value: action.val, isValid: action.val.trim().length <= 10, validMessage:""}
+  }
+  return {value: "", isValid: false}
+
+}
+const silnikReducer = (state, action) => {
+  if(action.type === "SILNIK"){
+    return {value: action.val, isValid: action.val.includes(".")}
+  }
+  return {value: "", isValid: false}
+
+}
+const vinReducer = (state, action) => {
+  if(action.type === "VIN") {
+    return {value: action.val, isValid: action.val.trim().length === 17, validMessage: "nieprawidłowy numer vin"}
+  }
+  return {value: "", isValid: false}
+
+}
+const przebiegReducer = (state, action) => {
+  if(action.type === "PRZEBIEG") {
+    return {value: action.val, isValid: action.val.trim().length <=7 }
+  }
+  return {value: "", isValid: false}
+}
+const dataBadaniaReducer = (state, action) => {
+  if(action.type === "DATABADANIA") {
+    return {value: action.val, isValid: (action.val.includes(new Date().getFullYear()) || action.val.includes(new Date().getFullYear() +1))}
+  }
+  return {value: "", isValid: false}
+}
+const dataUbezpieczeniaReducer = (state, action) => {
+  if(action.type === "DATAUBEZPIECZENIA") {
+    return {value: action.val, isValid: (action.val.includes(new Date().getFullYear()) || action.val.includes(new Date().getFullYear() -1))}
+  }
+  return {value: "", isValid: false}
 }
 
 function NewWehicle(props) {
-  const [marka, setMarka] = useState("");
-  const [model, setModel] = useState("");
-  const [nrrejestracyjny, setnrrejestracyjny] = useState("");
+  const [marka, setMarka] = useState("Audi");
   const [zdjecie, setZdjecie] = useState("");
-  const [rodzajpojazdu, setRodzajPojazdu] = useState("");
-  const [rodzajpaliwa, setRodzajPaliwa] = useState("");
-  const [silnik, setSilnik] = useState("");
-  const [vin, setVin] = useState("");
-  const [przebieg, setPrzebieg] = useState("");
-  const [databadania, setDataBadania] = useState("");
-  const [dataubezpieczenia, setDataUbezpieczenia] = useState("");
+  const [rodzajpojazdu, setRodzajPojazdu] = useState("Osobowy");
+  const [rodzajpaliwa, setRodzajPaliwa] = useState("Benzyna");
   const [isFormValid, setIsFormValid] = useState(false);
 
-  const [markaState, dispatchMarka] = useReducer(markaReducer, {
+  const [modelState, dispatchModel] = useReducer(modelReducer, {
     value: "",
     isValid: null,
+    validMessage: ""
+  })
+  const [nrrejestracyjnyState, dispatchNrRejestracyjny] = useReducer(nrRejestracyjnyReducer, {
+    value: "",
+    isValid: null,
+    validMessage: ""
+  })
+  const [silnikState, dispatchSilnik] = useReducer(silnikReducer, {
+    value: "",
+    isValid: null,
+    validMessage: ""
+  })
+  const [vinState, dispatchVin] = useReducer(vinReducer, {
+    value: "",
+    isValid: null,
+    validMessage: ""
+  })
+  const [przebiegState, dispatchPrzebieg] = useReducer(przebiegReducer, {
+    value: "",
+    isValid: null,
+    validMessage: ""
+  })
+  const [dataBadaniaState, dispatchDataBadania] = useReducer(dataBadaniaReducer, {
+    value: "",
+    isValid: null,
+    validMessage: ""
+  })
+  const [dataUbezpieczeniaState, dispatchDataUbezpieczenia] = useReducer(dataUbezpieczeniaReducer, {
+    value: "",
+    isValid: null,
+    validMessage: ""
   })
 
+
   useEffect(() => {
-    const identifier = setTimeout(() =>{
+    const identifier = setTimeout(() => {
       console.log("checking form validity");
       setIsFormValid(
-          markaState.isValid
+           modelState.isValid && nrrejestracyjnyState.isValid && silnikState.isValid &&
+          vinState.isValid && przebiegState.isValid && dataBadaniaState.isValid && dataUbezpieczeniaState.isValid
       )
     }, 500)
 
@@ -40,7 +107,7 @@ function NewWehicle(props) {
       console.log("cleanup")
       clearTimeout(identifier);
     }
-  }, [markaState])
+  }, [modelState, nrrejestracyjnyState, silnikState, vinState, przebiegState, dataBadaniaState, dataUbezpieczeniaState])
 
 
 
@@ -48,19 +115,20 @@ function NewWehicle(props) {
     event.preventDefault();
 
     const formData = new FormData();
-    formData.append("marka", markaState.value);
-    formData.append("model", model);
-    formData.append("nrrejestracyjny", nrrejestracyjny);
+    formData.append("marka", marka);
+    formData.append("model", modelState.value);
+    formData.append("nrrejestracyjny", nrrejestracyjnyState.value);
     formData.append("rodzajpojazdu", rodzajpojazdu)
     formData.append("rodzajpaliwa", rodzajpaliwa)
-    formData.append("silnik", silnik)
-    formData.append("vin", vin)
-    formData.append("przebieg", przebieg)
-    formData.append("databadania", databadania)
-    formData.append("dataubezpieczenia", dataubezpieczenia)
+    formData.append("silnik", silnikState.value)
+    formData.append("vin", vinState.value)
+    formData.append("przebieg", przebiegState.value)
+    formData.append("databadania", dataBadaniaState.value)
+    formData.append("dataubezpieczenia", dataUbezpieczeniaState.value)
     formData.append("file", zdjecie);
 
     console.log(isFormValid);
+
     if (isFormValid) {
       fetch('http://localhost:8000/api/addCar', {
         method: "POST",
@@ -82,7 +150,7 @@ function NewWehicle(props) {
       </Col>
       <Col xs={9} className="page">
         <Container
-          style={{ height: "100vh" }}
+          style={{ height: "auto", fontSize:"16px"}}
           className="justify-content-center align-items-center d-flex"
         >
           <Card
@@ -100,17 +168,26 @@ function NewWehicle(props) {
                 <Col>
                   <div className="form-group">
                     <label htmlFor="marka">Marka</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="marka"
-                      name="marka"
-                      value={markaState.value}
-                      onChange={(event) => {
-                        dispatchMarka({type: "MARKA", val:event.target.value})
-                      }}
-                    />
-                    {markaState.value}
+                    <select
+                        className="form-control"
+                        id="marka"
+                        name="marka"
+                        value={marka}
+                        onChange={(event) => setMarka(prev => prev=event.target.value) }
+                    >
+                      <option>Audi</option>
+                      <option>Bmw</option>
+                      <option>Opel</option>
+                      <option>Volkswagen</option>
+                      <option>Ford</option>
+                      <option>Mercedes-Benz</option>
+                      <option>Renault</option>
+                      <option>Toyota</option>
+                      <option>Skoda</option>
+                      <option>Mazda</option>
+                      <option>Peugeot</option>
+
+                    </select>
                   </div>
                   <div className="form-group">
                     <label htmlFor="model">Model</label>
@@ -119,8 +196,10 @@ function NewWehicle(props) {
                       className="form-control"
                       id="model"
                       name="model"
-                      value={model}
-                      onChange={(event) => setModel(prev => prev=event.target.value) }
+                      value={modelState.value}
+                      onChange={(event) => {
+                        dispatchModel({type: "MODEL", val:event.target.value})
+                      }}
                     />
                   </div>
                   <div className="form-group">
@@ -130,8 +209,10 @@ function NewWehicle(props) {
                       className="form-control"
                       id="nrrejestracyjny"
                       name="nrrejestracyjny"
-                      value={nrrejestracyjny}
-                      onChange={(event) => setnrrejestracyjny(prev => prev=event.target.value) }
+                      value={nrrejestracyjnyState.value}
+                      onChange={(event) =>{
+                        dispatchNrRejestracyjny({type: "NRREJ", val:event.target.value})
+                      }}
                     />
                   </div>
                   <div className="form-group">
@@ -141,11 +222,12 @@ function NewWehicle(props) {
                       id="rodzajpojazdu"
                       name="rodzajpojazdu"
                       value={rodzajpojazdu}
-                      onChange={(event) => setRodzajPojazdu(prev => prev=event.target.value) }
+                      onChange={(event) => {
+                        setRodzajPojazdu((prevState) => prevState = event.target.value)
+                      } }
                     >
                       <option>Osobowy</option>
                       <option>Dostawczy</option>
-                      <option>Ciężarowy</option>
                     </select>
                   </div>
                   <div className="form-group">
@@ -159,17 +241,20 @@ function NewWehicle(props) {
                     >
                       <option>Benzyna</option>
                       <option>Diesel</option>
+                      <option>Lpg</option>
                     </select>
                   </div>
                   <div className="form-group">
                     <label htmlFor="silnik">Silnik</label>
                     <input
-                      type="text"
+                      type="number"
                       className="form-control"
                       id="silnik"
                       name="silnik"
-                      value={silnik}
-                      onChange={(event) => setSilnik(prev => prev=event.target.value) }
+                      value={silnikState.value}
+                      onChange={(event) => {
+                       dispatchSilnik({type: "SILNIK", val: event.target.value})
+                      }}
                     />
                   </div>
                 </Col>
@@ -183,19 +268,24 @@ function NewWehicle(props) {
                       className="form-control"
                       id="vin"
                       name="vin"
-                      value={vin}
-                      onChange={(event) => setVin(prev => prev=event.target.value) }
+                      value={vinState.value}
+                      onChange={(event) => {
+                        dispatchVin({type: "VIN", val: event.target.value})
+                      }}
                     />
+                    {!vinState.isValid && <p style={{color: 'red', fontSize:"15px"}}>{vinState.validMessage}</p>}
                   </div>
                   <div className="form-group">
                     <label htmlFor="vin">Przebieg pojazdu</label>
                     <input
-                      type="text"
+                      type="number"
                       className="form-control"
                       id="przebieg"
                       name="przebieg"
-                      value={przebieg}
-                      onChange={(event) => setPrzebieg(prev => prev=event.target.value) }
+                      value={przebiegState.value}
+                      onChange={(event) => {
+                        dispatchPrzebieg({type: "PRZEBIEG", val:event.target.value})
+                      } }
                     />
                   </div>
                   <div className="form-group">
@@ -207,8 +297,10 @@ function NewWehicle(props) {
                       className="form-control"
                       id="databadania"
                       name="databadania"
-                      value={databadania}
-                      onChange={(event) => setDataBadania(prev => prev=event.target.value) }
+                      value={dataBadaniaState.value}
+                      onChange={(event) => {
+                        dispatchDataBadania({type:"DATABADANIA", val:event.target.value})
+                      }}
                     />
                   </div>
                   <div className="form-group">
@@ -220,25 +312,28 @@ function NewWehicle(props) {
                       className="form-control"
                       id="dataubezpieczenia"
                       name="dataubezpieczenia"
-                      value={dataubezpieczenia}
-                      onChange={(event) => setDataUbezpieczenia(prev => prev=event.target.value) }
+                      value={dataUbezpieczeniaState.value}
+                      onChange={(event) => {
+                       dispatchDataUbezpieczenia({type:"DATAUBEZPIECZENIA", val:event.target.value})
+                      }}
                     />
                   </div>
                   <div className="form-group mb-5">
-                    <label htmlFor="zdjecie">Wybierz zdjecie:</label>
+                    <label htmlFor="zdjecie" className="m-1">Wybierz zdjecie:</label>
                     <input
-                      type="file"
-                      className="form-control-file"
-                      id="zdjecie"
-                      name="zdjecie"
-                      onChange={(event) => setZdjecie(event.target.files[0]) }
+                        className="m-1"
+                        type="file"
+                        id="zdjecie"
+                        name="zdjecie"
+                        onChange={(event) => setZdjecie(event.target.files[0]) }
                     />
                   </div>
                   <div className="m-0 text-center">
                     <button
                         type="submit"
-                      className="btn btn-primary text-center"
-                      style={{ width: "200px" }}
+                        className="blue_button text-center pb-2 pt-2"
+                        style={{ width: "200px"}}
+                        disabled={!isFormValid}
                     >
                       Dodaj
                     </button>

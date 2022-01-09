@@ -92,7 +92,6 @@
     url("/src/images/sidebar-background.jpg") no-repeat;
 
   background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
   padding-top: 20px;
   height: 100vh;
@@ -478,9 +477,7 @@ select {
 .check_settings:checked {
   background-color: #4ec9d8 !important;
 }
-.page {
-  overflow: hidden;
-}
+
 .personalData {
   display: inline-block;
 }
@@ -707,8 +704,8 @@ p {
 }
 
 .page {
-  /* overflow: auto; */
-  /* height: 100vh; */
+   overflow: auto;
+   height: 100vh;
 }
 
 /* tabele nav*/
@@ -722,6 +719,11 @@ p {
 #tabs-container {
   max-height: 400px;
   overflow: auto;
+}
+.as-box-rounded-white{
+  padding:30px;
+  background-color:white;
+  border-radius:25px;
 }
 /* modal img docs*/
 @media only screen and (min-width: 576px) {

@@ -13,10 +13,10 @@ function SidebarNavigation() {
           <Link to="">Konserwacja</Link>
         </li>
         <li className={classes.sidebarMenuItem}>
-          <Link to="">Zgłoszenia</Link>
+          <Link to="/Flota/Reports">Zgłoszenia</Link>
         </li>
         <li className={classes.sidebarMenuItem}>
-          <Link to="">Uzytkownicy</Link>
+          <Link to="/Flota/Users">Uzytkownicy</Link>
         </li>
         <li className={classes.sidebarMenuItem}>
           <Link to="">Statystyki</Link>

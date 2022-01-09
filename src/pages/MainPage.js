@@ -6,73 +6,7 @@ import '../style/style.css'
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-/*{
-  id: "p1",
-      image: `${img}`,
-    nr_rejestracyjny: "SC 12345",
-    marka: "BMW",
-    model: "X520",
-},
-{
-  id: "p2",
-      image: `${img}`,
-    nr_rejestracyjny: "SC 22222",
-    marka: "BMW",
-    model: "X525",
-},
-{
-  id: "p3",
-      image: `${img}`,
-    nr_rejestracyjny: "SC 33333",
-    marka: "BMW",
-    model: "X530",
-},
-{
-  id: "p4",
-      image: `${img}`,
-    nr_rejestracyjny: "SC 44444",
-    marka: "BMW",
-    model: "X535",
-},
-{
-  id: "p5",
-      image: `${img}`,
-    nr_rejestracyjny: "SC 55555",
-    marka: "BMW",
-    model: "X540",
-},
-{
-  id: "p6",
-      image: `${img}`,
-    nr_rejestracyjny: "SC 66666",
-    marka: "BMW",
-    model: "X545",
-},
-{
-  id: "p7",
-      image: `${img}`,
-    nr_rejestracyjny: "SC 77777",
-    marka: "BMW",
-    model: "X550",
-},
-{
-  id: "p8",
-      image: `${img}`,
-    nr_rejestracyjny: "SC 88888",
-    marka: "BMW",
-    model: "X555",
-},
-{
-  id: "p9",
-      image: `${img}`,
-    nr_rejestracyjny: "SC 99999",
-    marka: "BMW",
-    model: "X560",
-},*/
-
-
 function MainPage() {
-  const  [Cards_Data, setCards_Data] =  useState([{}])
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [loadedWehicle, setLoadedWehicle] = useState([]);
@@ -97,7 +31,6 @@ function MainPage() {
       .then((data) => {
         setIsLoading(false);
         setLoadedWehicle(data);
-        console.log(data);
       });
   }, [setIsLoading, setLoadedWehicle]);
 
@@ -136,3 +69,7 @@ function MainPage() {
   );
 }
 export default MainPage;
+
+//@TODO Uzytkownicy, dodawanie uzytkownikow,
+//@TODO Raporty
+//@TODO single car

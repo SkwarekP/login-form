@@ -7,7 +7,7 @@ function Sidebar() {
     <div className={classes.sidebarCnt}>
       <div className={classes.sidebarProfileContainer}>
         <p className={classes.sidebarProfileImg}>
-          <img src={person} alt="chuj"></img>
+          <img src={person} alt="chuj" />
         </p>
         <p className={classes.sidebarYourName}>Patryk Skwara</p>
         <p className={classes.sidebarYourName}>administrator</p>
