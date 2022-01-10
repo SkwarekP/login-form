@@ -1,7 +1,6 @@
-import { Button, Col, Row, Container } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import Sidebar from "../components/layout/Sidebar";
 import CardList from "../components/Cards/CardList";
-import SearchBox from "../components/Searchbox";
 import '../style/style.css'
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -48,28 +47,26 @@ function MainPage() {
         <Sidebar />
       </Col>
       <Col xs={9} className="page">
-        <Container>
+        <div className="container-fluid">
           <Row>
             <Col xs={12} className="mt-3">
-              <div className="ml-3">
+              <div className="ml-3 page-title">
                 <h1>PME FLOTA</h1>
               </div>
-              <Button variant="primary" onClick={addNewWehicle}>
-                Add new
-              </Button>
             </Col>
-            <Col xs={12} className="mt-4 text-center">
-              <SearchBox />
-            </Col>
-            <CardList cards={loadedWehicle} />
           </Row>
-        </Container>
+              <button className="blue_button ml-3 mt-2 btn-outline-info" onClick={addNewWehicle}>
+                Dodaj pojazd
+              </button>
+            <CardList cards={loadedWehicle} />
+        </div>
       </Col>
     </Row>
   );
 }
 export default MainPage;
 
-//@TODO Uzytkownicy, dodawanie uzytkownikow,
-//@TODO Raporty
-//@TODO single car
+//@TODO Uzytkownicy, dodawanie uzytkownikow, CHECKED!
+//@TODO Raporty ---
+//@TODO single car ---
+//@TODO SETTINGS

@@ -65,12 +65,9 @@ function UsersForm() {
         formData.append("nr_telefonu", nrtelState.value)
         formData.append("is_admin", typeUser)
 
-            for (var value of formData.values()) {
-                console.log(formData.name);
-            }
 
-        /*if(isFormValid) {
-            fetch("", {
+        if(isFormValid) {
+            fetch("http://localhost:8000/api/users", {
                 method: "POST",
                 body: formData,
                 headers: {
@@ -83,7 +80,7 @@ function UsersForm() {
         }
         else {
             setFormValidMessage("Niepoprawne dane formularza");
-        }*/
+        }
 
         setImie("");
         setNazwisko("");

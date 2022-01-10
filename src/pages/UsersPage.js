@@ -8,38 +8,6 @@ function UsersPage() {
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [dummyData, setDummyData] = useState(
-        [
-            {
-                imie: "Jan",
-                nazwisko: "Kowalski",
-                email:"Jan.Kowalski@gmail.com",
-                nrtel:505155222,
-                typ:"Administrator",
-            },
-            {
-                imie: "Zbyszek",
-                nazwisko: "Kolton",
-                email:"Zbyszek.Kolton@gmail.com",
-                nrtel:50151515,
-                typ:"Uzytkownik",
-            },
-            {
-                imie: "Debil",
-                nazwisko: "Nowak",
-                email:"Debil.Nowak@gmail.com",
-                nrtel:222111333,
-                typ:"Administrator",
-            },
-            {
-                imie: "Mateusz",
-                nazwisko: "Patałaszek",
-                email:"Mateusz.Patałaszek@gmail.com",
-                nrtel:790132888,
-                typ:"Uzytkownik",
-            },
-        ]
-    )
 
     const navigateToAdd = () => {
         const path = "/Flota/Users/AddUser";
@@ -48,7 +16,7 @@ function UsersPage() {
 
     //get DATA
 
-   /* useEffect(() => {
+    useEffect(() => {
         setIsLoading(true);
         fetch("http://localhost:8000/api/users", {
             method: "GET",
@@ -61,8 +29,9 @@ function UsersPage() {
         }).then((data) => {
             setIsLoading(false);
             setUsers(data);
+            console.log(data);
         });
-    }, [])*/
+    }, [])
 
     if(isLoading){
         return (
@@ -107,14 +76,15 @@ function UsersPage() {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {dummyData.map((item) => (
+                                {users.map((item) => (
                                     <UsersList
                                         key={item.nrtel}
                                         imie={item.imie}
                                         nazwisko={item.nazwisko}
                                         email={item.email}
-                                        nrtel={item.nrtel}
-                                        typ={item.typ}
+                                        nrtel={item.nr_telefonu}
+                                        typ={item.is_admin}
+                                        onUpdate={setUsers}
                                     />
                                 ))}
                                 </tbody>

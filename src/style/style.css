@@ -236,16 +236,12 @@ select {
 
 /* mobile sidebar end */
 
-.line-hr hr {
-  background-color: white;
-  margin: 0;
-}
 
 /* Zgłoszenia */
 
 .reports_table {
-  height: 75vh;
   overflow: auto;
+  width: 100vw;
 }
 /* users */
 .container_users {
@@ -392,7 +388,7 @@ select {
 /* END SEARCHBOX */
 
 .car_info p {
-  margin: 0px;
+  margin: 0;
 }
 
 .car_info {
@@ -724,6 +720,7 @@ p {
   padding:30px;
   background-color:white;
   border-radius:25px;
+  opacity: 0.9;
 }
 /* modal img docs*/
 @media only screen and (min-width: 576px) {

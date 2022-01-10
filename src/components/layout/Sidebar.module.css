@@ -30,3 +30,7 @@ a {
   font-weight: 300;
   text-align: center;
 }
+.line_hr {
+  background-color: white;
+  margin: 0;
+}

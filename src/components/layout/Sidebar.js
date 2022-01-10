@@ -12,15 +12,15 @@ function Sidebar() {
         <p className={classes.sidebarYourName}>Patryk Skwara</p>
         <p className={classes.sidebarYourName}>administrator</p>
       </div>
-      <div className={classes.lineHr}>
-        <hr></hr>
+      <div className={classes.line_hr}>
+        <hr />
       </div>
       <Row>
-        <Col xs={3} md={2} xl={3} className="sidebar_fake_col"></Col>
+        <Col xs={3} md={2} xl={3} className="sidebar_fake_col"/>
         <Col xs={9} sm={12} md={8} xl={7}>
           <SidebarNavigation />
         </Col>
-        <Col xs={1} xl={3} className="sidebar_fake_col"></Col>
+        <Col xs={1} xl={3} className="sidebar_fake_col"/>
       </Row>
     </div>
   );
