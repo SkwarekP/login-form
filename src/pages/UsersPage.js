@@ -78,7 +78,7 @@ function UsersPage() {
                                 <tbody>
                                 {users.map((item) => (
                                     <UsersList
-                                        key={item.nrtel}
+                                        key={item.nr_telefonu}
                                         imie={item.imie}
                                         nazwisko={item.nazwisko}
                                         email={item.email}

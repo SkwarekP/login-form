@@ -19,7 +19,10 @@ function Login() {
       });
   }
 
-  return <LoginForm onLogIn={loginHandler} />;
+  return (
+
+  <LoginForm onLogIn={loginHandler} />
+  );
 }
 
 export default Login;
