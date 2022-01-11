@@ -10,13 +10,13 @@ import AddReport from "./components/Reports/AddReport";
 import Settings from "./pages/Settings";
 import MyCar from "./components/cars/MyCar";
 import { createContext, useState } from "react";
-
-export const UserContext = createContext(null);
+import UserContextProvider from "./store/user-context";
+// export const UserContext = createContext(null);
 
 function App() {
-  const [user, setUser] = useState({ name: "", type: false, zdjecie: "" });
+  // const [user, setUser] = useState({ name: "", type: false, zdjecie: "" });
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContextProvider>
       <Layout>
         <Routes>
           <Route path="/" element={<Login />} />
@@ -30,7 +30,7 @@ function App() {
           <Route path="/Flota/MyCar" element={<MyCar />} />
         </Routes>
       </Layout>
-    </UserContext.Provider>
+    </UserContextProvider>
   );
 }
 
