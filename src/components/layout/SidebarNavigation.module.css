@@ -15,8 +15,12 @@
   /* padding-right:30px; */
   padding-left: calc(15px + 6 * ((100vw - 320px) / 680));
   padding-right: calc(15px + 6 * ((100vw - 320px) / 680));
-  transition: all 0.4s;
+  transition: all 0.3s;
+
   display: flex;
+}
+.sidebarMenuWrapper .sidebarMenuItem a:hover {
+  font-size: large;
 }
 .sidebarMenuItem .active {
   background-color: #0db5c9;

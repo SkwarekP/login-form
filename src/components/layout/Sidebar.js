@@ -2,6 +2,7 @@ import { Col, Row } from "react-bootstrap";
 import person from "../../images/person.jpg";
 import SidebarNavigation from "./SidebarNavigation";
 import classes from "./Sidebar.module.css";
+
 function Sidebar() {
   return (
     <div className={classes.sidebarCnt}>
@@ -16,11 +17,11 @@ function Sidebar() {
         <hr />
       </div>
       <Row>
-        <Col xs={3} md={2} xl={3} className="sidebar_fake_col"/>
+        <Col xs={3} md={2} xl={3} className="sidebar_fake_col" />
         <Col xs={9} sm={12} md={8} xl={7}>
           <SidebarNavigation />
         </Col>
-        <Col xs={1} xl={3} className="sidebar_fake_col"/>
+        <Col xs={1} xl={3} className="sidebar_fake_col" />
       </Row>
     </div>
   );

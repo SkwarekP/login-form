@@ -1,7 +1,7 @@
-import { Button, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import Sidebar from "../components/layout/Sidebar";
 import CardList from "../components/Cards/CardList";
-import '../style/style.css'
+import "../style/style.css";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -17,11 +17,11 @@ function MainPage() {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch('http://localhost:8000/api/cars',{
+    fetch("http://localhost:8000/api/cars", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "token" : localStorage.getItem("token")
+        token: localStorage.getItem("token"),
       },
     })
       .then((response) => {
@@ -55,10 +55,13 @@ function MainPage() {
               </div>
             </Col>
           </Row>
-              <button className="blue_button ml-3 mt-2 btn-outline-info" onClick={addNewWehicle}>
-                Dodaj pojazd
-              </button>
-            <CardList cards={loadedWehicle} />
+          <button
+            className="blue_button ml-3 mt-2 btn-outline-info"
+            onClick={addNewWehicle}
+          >
+            Dodaj pojazd
+          </button>
+          <CardList cards={loadedWehicle} />
         </div>
       </Col>
     </Row>

@@ -8,6 +8,7 @@ import UsersForm from "./components/Users/UsersForm";
 import ReportsPage from "./pages/ReportsPage";
 import AddReport from "./components/Reports/AddReport";
 import Settings from "./pages/Settings";
+import MyCar from "./components/cars/MyCar";
 
 function App() {
   return (
@@ -20,8 +21,8 @@ function App() {
         <Route path="/Flota/Users/AddUser" element={<UsersForm />} />
         <Route path="/Flota/Reports" element={<ReportsPage />} />
         <Route path="/Flota/Reports/AddReport" element={<AddReport />} />
-        <Route path="/Flota/Settings" element={<Settings />}/>
-
+        <Route path="/Flota/Settings" element={<Settings />} />
+        <Route path="/Flota/MyCar" element={<MyCar />} />
       </Routes>
     </Layout>
   );

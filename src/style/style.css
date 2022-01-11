@@ -136,7 +136,7 @@
   list-style-type: none;
 }
 
-.sidebar-menu-wrapper .sidebar-menu-item a {
+.sidebar-menu-wrapper .sidebar-menu-item .sidebar-single-item {
   text-decoration: none;
   padding: 12px;
   font-size: calc(6px + 6 * ((100vw - 320px) / 680));
@@ -235,7 +235,6 @@ select {
 }
 
 /* mobile sidebar end */
-
 
 /* Zgłoszenia */
 
@@ -700,8 +699,8 @@ p {
 }
 
 .page {
-   overflow: auto;
-   height: 100vh;
+  overflow: auto;
+  height: 100vh;
 }
 
 /* tabele nav*/
@@ -716,10 +715,10 @@ p {
   max-height: 400px;
   overflow: auto;
 }
-.as-box-rounded-white{
-  padding:30px;
-  background-color:white;
-  border-radius:25px;
+.as-box-rounded-white {
+  padding: 30px;
+  background-color: white;
+  border-radius: 25px;
   opacity: 0.9;
 }
 /* modal img docs*/

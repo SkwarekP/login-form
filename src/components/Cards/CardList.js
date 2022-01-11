@@ -9,7 +9,6 @@ function CardList(props) {
           {props.cards.map((card) => (
             <CardItem
               key={card.id}
-              id={card.id}
               image={card.zdjecie}
               nr_rejestracyjny={card.nrrejestracyjny}
               marka={card.marka}

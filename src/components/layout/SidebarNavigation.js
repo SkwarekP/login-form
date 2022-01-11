@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import classes from "./SidebarNavigation.module.css";
-import {useState} from "react";
+import { useState } from "react";
 function SidebarNavigation() {
-
   const [active, setActive] = useState(false);
   return (
     <header>
@@ -16,7 +15,13 @@ function SidebarNavigation() {
           <Link to="">Konserwacja</Link>
         </li>
         <li className={classes.sidebarMenuItem}>
-          <Link to="/Flota/Reports" className={active ? classes.active : ""} onClick={() => setActive(prev => !prev)}>Zgłoszenia</Link>
+          <Link
+            to="/Flota/Reports"
+            className={active ? classes.active : ""}
+            onClick={() => setActive((prev) => !prev)}
+          >
+            Zgłoszenia
+          </Link>
         </li>
         <li className={classes.sidebarMenuItem}>
           <Link to="/Flota/Users">Uzytkownicy</Link>
