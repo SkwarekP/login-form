@@ -9,22 +9,28 @@ import ReportsPage from "./pages/ReportsPage";
 import AddReport from "./components/Reports/AddReport";
 import Settings from "./pages/Settings";
 import MyCar from "./components/cars/MyCar";
+import { createContext, useState } from "react";
+
+export const UserContext = createContext(null);
 
 function App() {
+  const [user, setUser] = useState({ name: "", type: false, zdjecie: "" });
   return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/Flota" element={<MainPage />} />
-        <Route path="/Flota/AddWehicle" element={<NewWehicle />} />
-        <Route path="/Flota/Users" element={<UsersPage />} />
-        <Route path="/Flota/Users/AddUser" element={<UsersForm />} />
-        <Route path="/Flota/Reports" element={<ReportsPage />} />
-        <Route path="/Flota/Reports/AddReport" element={<AddReport />} />
-        <Route path="/Flota/Settings" element={<Settings />} />
-        <Route path="/Flota/MyCar" element={<MyCar />} />
-      </Routes>
-    </Layout>
+    <UserContext.Provider value={{ user, setUser }}>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/Flota" element={<MainPage />} />
+          <Route path="/Flota/AddWehicle" element={<NewWehicle />} />
+          <Route path="/Flota/Users" element={<UsersPage />} />
+          <Route path="/Flota/Users/AddUser" element={<UsersForm />} />
+          <Route path="/Flota/Reports" element={<ReportsPage />} />
+          <Route path="/Flota/Reports/AddReport" element={<AddReport />} />
+          <Route path="/Flota/Settings" element={<Settings />} />
+          <Route path="/Flota/MyCar" element={<MyCar />} />
+        </Routes>
+      </Layout>
+    </UserContext.Provider>
   );
 }
 
