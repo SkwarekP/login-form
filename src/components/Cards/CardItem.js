@@ -6,9 +6,10 @@ function CardItem(props) {
   const navigate = useNavigate();
 
   const navigateHandler = () => {
-    const path = "/Flota/MyCar";
+    const path = `/Flota/MyCar/${props.id}`;
     navigate(path);
   };
+
   return (
     <Col xs={12} sm={12} md={4} lg={4} xl={4}>
       <Card onClick={navigateHandler}>
