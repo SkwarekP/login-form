@@ -4,6 +4,8 @@ import Searchbox from "../components/Searchbox";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import UsersList from "../components/Users/UsersList";
+import Settings from "./Settings";
+
 function UsersPage() {
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
@@ -22,7 +24,7 @@ function UsersPage() {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
-                "token" : localStorage.getItem("token")
+                "token": localStorage.getItem("token")
             },
         }).then((res) => {
             return res.json();
@@ -33,7 +35,7 @@ function UsersPage() {
         });
     }, [])
 
-    if(isLoading){
+    if (isLoading) {
         return (
             <section>
                 <p>Loading...</p>
@@ -44,7 +46,7 @@ function UsersPage() {
     return (
         <Row>
             <Col sm={3} className="sidebar-menu-container">
-                <Sidebar />
+                <Sidebar/>
             </Col>
             <Col sm={9} className="page">
                 <div className="container-fluid container_users">
@@ -55,10 +57,12 @@ function UsersPage() {
                             </div>
                         </Col>
                     </Row>
-                    <button className="blue_button ml-3 mt-2 btn-outline-info" onClick={navigateToAdd}>Dodaj użytkownika</button>
+                    <button className="blue_button ml-3 mt-2 btn-outline-info" onClick={navigateToAdd}>Dodaj
+                        użytkownika
+                    </button>
                     <Row>
                         <Col sm={6} lg={4} md={4} xl={4} className="mt-4 mb-4">
-                            <Searchbox />
+                            <Searchbox/>
                         </Col>
                     </Row>
                     <Row>

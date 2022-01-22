@@ -1,4 +1,4 @@
-import React, {useState, useContext, createContext, useEffect} from "react";
+import React, {useState, createContext, useEffect} from "react";
 
 export const UserContext = createContext();
 
@@ -28,6 +28,8 @@ function UserContextProvider({children}) {
                 });
         }
     }, []);
+
+
 
     return (
         <UserContext.Provider value={{user, setUser}}>

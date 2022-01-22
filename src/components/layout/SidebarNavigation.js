@@ -8,7 +8,6 @@ function SidebarNavigation(props) {
     const {setUser} = useContext(UserContext);
 
     const logout = () => {
-        console.log("chuj");
         setUser(() => {
             return {token: localStorage.removeItem("token"), name: "", type: false, zdjecie: ""}
         })
@@ -35,12 +34,6 @@ function SidebarNavigation(props) {
                 </li>
                 <li className={classes.sidebarMenuItem}>
                     <Link to="/Flota/Users">Uzytkownicy</Link>
-                </li>
-                <li className={classes.sidebarMenuItem}>
-                    <Link to="">Statystyki</Link>
-                </li>
-                <li className={classes.sidebarMenuItem}>
-                    <Link to="">Serwisy</Link>
                 </li>
                 <li className={classes.sidebarMenuItem}>
                     <Link to="/Flota/Settings">Ustawienia</Link>
