@@ -31,7 +31,7 @@ function MainPage() {
         setIsLoading(false);
         setLoadedWehicle(data);
       });
-  }, [setIsLoading, setLoadedWehicle]);
+  }, []);
 
   if (isLoading) {
     return (
@@ -61,6 +61,7 @@ function MainPage() {
           >
             Dodaj pojazd
           </button>
+          {console.log(loadedWehicle)}
           <CardList cards={loadedWehicle} />
         </div>
       </Col>

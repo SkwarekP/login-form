@@ -1,7 +1,22 @@
 import { Col, Row } from "react-bootstrap";
 import Sidebar from "../layout/Sidebar";
+import { useEffect, useState } from "react";
 
 function MyCar() {
+  const [carInfo, setCarInfo] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/cars/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCarInfo((prev) => data);
+      });
+  }, []);
   return (
     <Row>
       <Col sm={3} className="sidebar-menu-container">
@@ -28,7 +43,7 @@ function MyCar() {
                   </p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
-                  <p>Fiat</p>
+                  <p>fiat</p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
                   <p>
@@ -121,6 +136,42 @@ function MyCar() {
                 <Col sm={3} md={0} lg={3} xl={3} />
                 <Col sm={3} md={0} lg={3} xl={3} />
               </Row>
+            </Col>
+
+            <Col sm={12} className="as-box-rounded-white mt-3">
+              <Row>
+                <div className="page-title mb-2">
+                  <h3 className="ml-3 text-unwrap">Dane pojazdu</h3>
+                </div>
+              </Row>
+              <div class="tab-content">
+                <table class="table mt-3 ">
+                  <thead>
+                    <tr class="mb-5">
+                      <th>Data tankowania</th>
+                      <th>Przebieg</th>
+                      <th>Cena paliwa</th>
+                      <th>Ilość paliwa</th>
+                      <th>Łączny koszt</th>
+                      <th>Edytuj</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>20.20.2002</td>
+                      <td>1000km</td>
+                      <td>3.33</td>
+                      <td>100 litrow</td>
+                      <td>333zł</td>
+                      <td>
+                        <a href="">
+                          <i class="fas fa-edit mr-2"></i>Edytuj
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </Col>
           </Row>
         </div>

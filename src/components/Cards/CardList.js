@@ -8,6 +8,7 @@ function CardList(props) {
         <CardGroup>
           {props.cards.map((card) => (
             <CardItem
+              id={card.id}
               key={card.id}
               image={card.zdjecie}
               nr_rejestracyjny={card.nrrejestracyjny}
