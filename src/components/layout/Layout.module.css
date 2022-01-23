@@ -1,9 +1,9 @@
 .containerFluid {
     font-size: calc(6px + 6 * ((100vw - 320px) / 680));
     cursor: url("/src/images/kursor.png"), auto !important;
-    height:100vh;
-    background:url(../../images/tlo.jpg);
-    overflow:auto;
+    height: 100vh;
+    background: url(../../images/tlo.jpg);
+    overflow: hidden;
     overflow-x: hidden;
     font-family: Roboto;
-  }
+}

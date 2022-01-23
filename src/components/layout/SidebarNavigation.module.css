@@ -1,39 +1,43 @@
 .sidebarMenuWrapper {
-  padding: 0;
+    padding: 0;
 
-  list-style-type: none;
+    list-style-type: none;
 }
 
 .sidebarMenuWrapper .sidebarMenuItem a {
-  text-decoration: none;
-  padding: 12px;
-  font-size: calc(6px + 6 * ((100vw - 320px) / 680));
-  color: white;
-  /* font-size:large; */
-  font-weight: lighter;
-  /* padding-left:30px; */
-  /* padding-right:30px; */
-  padding-left: calc(15px + 6 * ((100vw - 320px) / 680));
-  padding-right: calc(15px + 6 * ((100vw - 320px) / 680));
-  transition: all 0.3s;
+    text-decoration: none;
+    padding: 18px;
+    font-size: calc(5px + 6 * ((100vw - 320px) / 680));
+    color: white;
+    /* font-size:large; */
+    font-weight: lighter;
+    /* padding-left:30px; */
+    /* padding-right:30px; */
+    padding-left: calc(15px + 6 * ((100vw - 320px) / 680));
+    padding-right: calc(15px + 6 * ((100vw - 320px) / 680));
+    transition: all 0.4s;
 
-  display: flex;
+    display: flex;
 }
+
 .sidebarMenuWrapper .sidebarMenuItem a:hover {
-  font-size: large;
+    font-size: large;
 }
-.sidebarMenuItem .active {
-  background-color: #0db5c9;
 
-  border-radius: 10px;
+.sidebarMenuItem .active {
+    background-color: #0db5c9;
+
+    border-radius: 20px;
 }
+
 .sidebarMenuWrapper li:not(:last-child) {
-  margin-bottom: 2px;
+    margin-bottom: 15px;
 }
 
 .sidebarMenuWrapper li:last-child {
-  margin-top: 10px;
+    margin-top: 25px;
 }
+
 .sidebarMenuWrapper .sidebarMenuItem a:hover .ikona_menu {
-  margin-right: 5px;
+    margin-right: 5px;
 }

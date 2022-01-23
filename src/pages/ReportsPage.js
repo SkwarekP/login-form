@@ -3,6 +3,7 @@ import Sidebar from "../components/layout/Sidebar";
 import Searchbox from "../components/Searchbox";
 import ReportsList from "../components/Reports/ReportsList";
 import {useNavigate} from "react-router-dom";
+import Logo from "../components/Logo";
 
 function ReportsPage() {
 
@@ -34,21 +35,23 @@ function ReportsPage() {
     return (
         <Row>
             <Col sm={3} className="sidebar-menu-container">
-                <Sidebar />
+                <Sidebar/>
             </Col>
             <Col sm={9} className="page">
                 <div className="container-fluid">
                     <Row>
                         <Col sm={12} className="mt-3">
                             <div className="page-title">
-                                <h1>Zgłoszenia</h1>
+                                <Logo/><h1 className="m-2">Zgłoszenia</h1>
                             </div>
                         </Col>
                     </Row>
-                    <button className="blue_button ml-3 mt-2 btn-outline-info" onClick={addReportHandler}>Dodaj zgłoszenie</button>
+                    <button className="blue_button ml-3 mt-2 btn-outline-info" onClick={addReportHandler}>Dodaj
+                        zgłoszenie
+                    </button>
                     <Row className="mt-4">
                         <Col sm={4}>
-                            <Searchbox />
+                            <Searchbox/>
                         </Col>
                     </Row>
                     <Row>
@@ -67,17 +70,17 @@ function ReportsPage() {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    {dummy_data.map((item) => (
-                                        <ReportsList
-                                            key={item.nr_rejestracyjny}
-                                            marka={item.marka}
-                                            model={item.model}
-                                            nr_rej={item.nr_rejestracyjny}
-                                            osoba={item.osoba}
-                                            typ={item.typ_pojazdu}
-                                            data={item.data_zgloszenia}
-                                        />
-                                    ))}
+                                {dummy_data.map((item) => (
+                                    <ReportsList
+                                        key={item.nr_rejestracyjny}
+                                        marka={item.marka}
+                                        model={item.model}
+                                        nr_rej={item.nr_rejestracyjny}
+                                        osoba={item.osoba}
+                                        typ={item.typ_pojazdu}
+                                        data={item.data_zgloszenia}
+                                    />
+                                ))}
                                 </tbody>
 
                             </table>

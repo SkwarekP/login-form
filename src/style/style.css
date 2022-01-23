@@ -80,7 +80,15 @@ input[type=file]::file-selector-button {
 
 .page-title h1,
 .page-title h3 {
+    float: left;
     font-weight: 300;
+    color: #403010
+}
+
+.fadeOut {
+    -webkit-animation-name: fadeOut;
+    animation-name: fadeOut;
+    color: green;
 }
 
 /* BUTTONS */

@@ -4,8 +4,12 @@ import SettingsForm from "../components/Settings/SettingsForm";
 import {useEffect, useState, useContext} from "react";
 import {UserContext} from "../store/user-context";
 import {useStateCallback} from "use-state-callback";
+import Logo from "../components/Logo";
 
 function Settings() {
+
+    const [correct, setCorrect] = useState("");
+    const [isCorrect, setIsCorrect] = useState(false);
 
     const [currentUser, setCurrentUser] = useState({
         imie: "",
@@ -21,6 +25,7 @@ function Settings() {
 
 
     useEffect(() => {
+        console.log("effect");
         fetch("http://localhost:8000/api/users", {
             method: "GET",
             headers: {
@@ -45,7 +50,7 @@ function Settings() {
             }
         })
 
-    }, [])
+    }, [user])
 
     const changePicture = (st) => {
         const formData = new FormData();
@@ -67,6 +72,8 @@ function Settings() {
                     return {...prev, zdjecie: res.zdjecie}
                 })
             })
+        setIsCorrect(() => true)
+        setCorrect("Pomyślnie zmieniono zdjęcie!")
 
     }
 
@@ -80,12 +87,12 @@ function Settings() {
                     <Row>
                         <Col sm={12} className="mt-2">
                             <div className="page-title text-uppercase">
-                                <h1 className="text-nowrap">PME FLOTA</h1>
+                                <Logo/><h1 className="m-2">USTAWIENIA</h1>
                             </div>
                         </Col>
 
                         <Col sm={12}>
-                            <div className=" shadow-lg as-box-rounded-white mt-2">
+                            <div className=" shadow-lg as-box-rounded-white mt-3">
                                 <h5 className="text-uppercase">Twoje dane:</h5>
                                 <Row>
                                     <Col sm={3} lg={3}>
@@ -149,6 +156,7 @@ function Settings() {
                                                 }}
                                             />
                                         </label>
+                                        {isCorrect && <p className="fadeOut mt-1">{correct}</p>}
                                     </Col>
                                 </Row>
                             </div>

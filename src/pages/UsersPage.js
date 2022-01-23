@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import UsersList from "../components/Users/UsersList";
 import Settings from "./Settings";
+import Logo from "../components/Logo";
 
 function UsersPage() {
     const navigate = useNavigate();
@@ -53,7 +54,7 @@ function UsersPage() {
                     <Row>
                         <Col sm={12} className="mt-3">
                             <div className="page-title">
-                                <h1>Użytkownicy</h1>
+                                <Logo/><h1 className="m-2">Użytkownicy</h1>
                             </div>
                         </Col>
                     </Row>

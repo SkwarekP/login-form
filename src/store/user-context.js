@@ -1,9 +1,17 @@
 import React, {useState, createContext, useEffect} from "react";
+import {useNavigate} from "react-router-dom";
+
 
 export const UserContext = createContext();
 
 function UserContextProvider({children}) {
-    const [user, setUser] = useState({name: "", type: false, zdjecie: "", token: ""});
+    const navigate = useNavigate();
+    const [user, setUser] = useState({
+        name: "",
+        type: false,
+        zdjecie: "",
+        token: "",
+    });
 
     useEffect(() => {
         if (localStorage.getItem("token")) {
@@ -22,14 +30,15 @@ function UserContextProvider({children}) {
                         name: data.name,
                         type: data.is_admin,
                         zdjecie: data.zdjecie,
-                        token: localStorage.getItem("token")
+                        token: localStorage.getItem("token"),
                     };
                     setUser(user);
                 });
+        } else {
+            const path = "/";
+            navigate(path);
         }
-    }, []);
-
-
+    }, [navigate]);
 
     return (
         <UserContext.Provider value={{user, setUser}}>
