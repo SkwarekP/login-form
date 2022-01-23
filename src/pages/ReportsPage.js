@@ -49,11 +49,7 @@ function ReportsPage() {
                     <button className="blue_button ml-3 mt-2 btn-outline-info" onClick={addReportHandler}>Dodaj
                         zgłoszenie
                     </button>
-                    <Row className="mt-4">
-                        <Col sm={4}>
-                            <Searchbox/>
-                        </Col>
-                    </Row>
+                    
                     <Row>
                         <Col sm={12} className="shadow-1 as-box-rounded-white reports_table mt-5">
                             <table className="table">

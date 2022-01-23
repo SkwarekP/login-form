@@ -4,12 +4,12 @@ import Searchbox from "../components/Searchbox";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import UsersList from "../components/Users/UsersList";
-import Settings from "./Settings";
 import Logo from "../components/Logo";
 
 function UsersPage() {
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
+    const [searchUsers, setSearchUsers] = useState("")
     const [isLoading, setIsLoading] = useState(false);
 
     const navigateToAdd = () => {
@@ -36,6 +36,12 @@ function UsersPage() {
         });
     }, [])
 
+    const searchSmth = (data) => {
+        setSearchUsers(() => data)
+        console.log(data);
+
+    }
+
     if (isLoading) {
         return (
             <section>
@@ -43,6 +49,7 @@ function UsersPage() {
             </section>
         );
     }
+
 
     return (
         <Row>
@@ -63,7 +70,7 @@ function UsersPage() {
                     </button>
                     <Row>
                         <Col sm={6} lg={4} md={4} xl={4} className="mt-4 mb-4">
-                            <Searchbox/>
+                            <Searchbox onReceive={searchSmth}/>
                         </Col>
                     </Row>
                     <Row>
@@ -81,7 +88,13 @@ function UsersPage() {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {users.map((item) => (
+                                {users.filter((val) => {
+                                    if (searchUsers === "") {
+                                        return val
+                                    } else if (val.email.toLowerCase().includes(searchUsers.toLowerCase())) {
+                                        return val
+                                    }
+                                }).map((item) => (
                                     <UsersList
                                         key={item.nr_telefonu}
                                         imie={item.imie}
