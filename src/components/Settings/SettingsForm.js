@@ -13,6 +13,9 @@ function SettingsForm(props) {
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [repeatNewPassword, setRepeatPassword] = useState("");
+    const [isChangePassword, setIsChangePassword] = useState(false);
+    const [message, setMessage] = useState("");
+
 
     const sendData = (e) => {
         e.preventDefault();
@@ -21,7 +24,18 @@ function SettingsForm(props) {
                 old_password: oldPassword,
                 new_password: newPassword
             }
+            setIsChangePassword(() => true)
+            setMessage(() => "Pomyślnie zmieniono hasło")
             props.password(data);
+            setOldPassword("");
+            setNewPassword("");
+            setRepeatPassword("");
+        } else {
+            setIsChangePassword(() => false)
+            setMessage(() => "Niepoprawne dane!")
+            setOldPassword("");
+            setNewPassword("");
+            setRepeatPassword("");
         }
     }
 
@@ -39,6 +53,7 @@ function SettingsForm(props) {
                                     variant="standard"
                                     fullWidth
                                     type="password"
+                                    value={oldPassword}
                                     onChange={(e) => setOldPassword(prev => e.target.value)}
                                 />
                                 <TextField
@@ -46,6 +61,7 @@ function SettingsForm(props) {
                                     variant="standard"
                                     fullWidth
                                     type="password"
+                                    value={newPassword}
                                     onChange={(e) => setNewPassword(prev => e.target.value)}
                                 />
                                 <TextField
@@ -53,6 +69,7 @@ function SettingsForm(props) {
                                     variant="standard"
                                     fullWidth
                                     type="password"
+                                    value={repeatNewPassword}
                                     onChange={(e) => setRepeatPassword(prev => e.target.value)}
                                 />
                             </CardContent>
@@ -61,6 +78,9 @@ function SettingsForm(props) {
                                     Zatwierdź
                                 </Button>
                             </CardActions>
+                            {isChangePassword && <p className="fadeOut">{message}</p>}
+                            {!isChangePassword && <p className="inCorrect">{message}</p>}
+
                         </Card>
                     </Col>
                 </form>

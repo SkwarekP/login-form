@@ -91,7 +91,15 @@ input[type=file]::file-selector-button {
     color: #403010
 }
 
+.inCorrect {
+    color: red;
+    font-size: 16px;
+    -webkit-animation-name: fadeOut;
+    animation-name: fadeOut;
+}
+
 .fadeOut {
+    font-size: 16px;
     -webkit-animation-name: fadeOut;
     animation-name: fadeOut;
     color: green;

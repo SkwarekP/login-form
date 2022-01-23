@@ -84,11 +84,9 @@ function Settings() {
             body: JSON.stringify(passwords),
             headers: {
                 "Content-Type": "application/json",
-                "Acces-Control-Allow-Origin": "http://localhost:8000",
                 "token": localStorage.getItem("token")
             }
-        }).then(res => res.json())
-            .then(res => console.log(res))
+        }).then(res => console.log(res))
 
     }
 
