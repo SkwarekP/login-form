@@ -19,7 +19,16 @@ function SettingsForm(props) {
 
     const sendData = (e) => {
         e.preventDefault();
-        if (newPassword === repeatNewPassword) {
+        if (newPassword !== repeatNewPassword) {
+            setIsChangePassword(() => false)
+            setMessage(() => "Niepoprawne dane!")
+            setOldPassword("");
+            setNewPassword("");
+            setRepeatPassword("");
+        } else if (newPassword === "" || oldPassword === "" || repeatNewPassword === "") {
+            setIsChangePassword(() => false)
+            setMessage(() => "Pola nie mogą być puste!")
+        } else {
             const data = {
                 old_password: oldPassword,
                 new_password: newPassword
@@ -27,12 +36,6 @@ function SettingsForm(props) {
             setIsChangePassword(() => true)
             setMessage(() => "Pomyślnie zmieniono hasło")
             props.password(data);
-            setOldPassword("");
-            setNewPassword("");
-            setRepeatPassword("");
-        } else {
-            setIsChangePassword(() => false)
-            setMessage(() => "Niepoprawne dane!")
             setOldPassword("");
             setNewPassword("");
             setRepeatPassword("");
