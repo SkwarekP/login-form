@@ -77,6 +77,21 @@ function Settings() {
 
     }
 
+    const changePassword = (passwords) => {
+
+        fetch("http://localhost:8000/api/changePassword", {
+            method: "PUT",
+            body: JSON.stringify(passwords),
+            headers: {
+                "Content-Type": "application/json",
+                "Acces-Control-Allow-Origin": "http://localhost:8000",
+                "token": localStorage.getItem("token")
+            }
+        }).then(res => res.json())
+            .then(res => console.log(res))
+
+    }
+
     return (
         <Row>
             <Col sm={3} className="sidebar-menu-container">
@@ -86,8 +101,8 @@ function Settings() {
                 <div className="container-fluid">
                     <Row>
                         <Col sm={12} className="mt-2">
-                            <div className="page-title text-uppercase">
-                                <Logo/><h1 className="m-2">USTAWIENIA</h1>
+                            <div className="page-title">
+                                <Logo/><h1 className="m-2">Ustawienia</h1>
                             </div>
                         </Col>
 
@@ -162,7 +177,7 @@ function Settings() {
                             </div>
                             <div className="shadow-lg as-box-rounded-white mt-5">
                                 <Row>
-                                    <SettingsForm/>
+                                    <SettingsForm password={changePassword}/>
                                 </Row>
                             </div>
                         </Col>
