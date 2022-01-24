@@ -1,17 +1,48 @@
 import { Card, Col, Container, Row } from "react-bootstrap";
 import Sidebar from "../layout/Sidebar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function AddReport() {
-  const [marka, setMarka] = useState("Audi");
-  const [model, setModel] = useState("");
-  const [nrrejestracyjny, setNumerRejestracyjny] = useState("");
-  const [rodzajpojazdu, setRodzajPojazdu] = useState("Osobowy");
-
-  const submitHandler = (e) => {
-    e.preventDefault();
+  const [cars, setCars] = useState([]);
+  const [report, setReport] = useState({
+    tytul: "",
+    opis: "",
+    id_pojazdu: null,
+  });
+  useEffect(() => {
+    fetch("http://localhost:8000/api/cars", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        token: localStorage.getItem("token"),
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setCars(data);
+        setReport({ ...report, id_pojazdu: data[0].id });
+      });
+  }, []);
+  const changeCar = (event) => {
+    event.preventDefault();
+    var selectedIndex = event.target.options.selectedIndex;
+    console.log("reportasdflkasd", report);
+    setReport({ ...report, id_pojazdu: cars[selectedIndex].id });
   };
-
+  const dodajReporta = (event) => {
+    event.preventDefault();
+    console.log(report);
+    fetch("http://localhost:8000/api/reports", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        token: localStorage.getItem("token"),
+      },
+      body: JSON.stringify(report),
+    })
+      .then((response) => response.json())
+      .then((res) => console.log(res));
+  };
   return (
     <Row>
       <Col sm={3} className="sidebar-menu-container">
@@ -26,83 +57,41 @@ function AddReport() {
             style={{
               width: "auto",
               height: "auto",
-              background: "",
               borderRadius: "15px",
               padding: "25px",
             }}
-            className="shadow-lg border-0 mt-4"
+            className="shadow-lg border-0 mt-4 align-items-center"
           >
-            <form onSubmit={submitHandler}>
+            <form onSubmit={dodajReporta}>
               <Row>
                 <Col>
                   <div className="form-group">
-                    <label htmlFor="marka">Marka</label>
-                    <select
-                      className="form-control"
-                      id="marka"
-                      name="marka"
-                      value={marka}
-                      onChange={(event) =>
-                        setMarka((prev) => (prev = event.target.value))
-                      }
-                    >
-                      <option>Audi</option>
-                      <option>Bmw</option>
-                      <option>Opel</option>
-                      <option>Volkswagen</option>
-                      <option>Ford</option>
-                      <option>Mercedes-Benz</option>
-                      <option>Renault</option>
-                      <option>Toyota</option>
-                      <option>Skoda</option>
-                      <option>Mazda</option>
-                      <option>Peugeot</option>
+                    <label htmlFor="marka">Numer rejestracyjny pojazdu</label>
+
+                    <select className="form-control" onChange={changeCar}>
+                      {cars.map((car) => (
+                        <option>{car.nrrejestracyjny}</option>
+                      ))}
                     </select>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="model">Model</label>
+                    <label htmlFor="model">Tytuł zgłoszenia:</label>
                     <input
                       type="text"
                       className="form-control"
-                      id="model"
-                      name="model"
-                      value={model}
                       onChange={(event) =>
-                        setModel((prev) => (prev = event.target.value))
+                        setReport({ ...report, tytul: event.target.value })
                       }
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="nrrejestracyjny">Numer rejestracyjny</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="nrrejestracyjny"
-                      name="nrrejestracyjny"
-                      value={nrrejestracyjny}
-                      onChange={(event) => {
-                        setNumerRejestracyjny(
-                          (prev) => (prev = event.target.value)
-                        );
-                      }}
+                    <label htmlFor="nrrejestracyjny">Treść zgłoszenia</label>
+                    <textarea
+                      className="form-control  mb-4"
+                      onChange={(event) =>
+                        setReport({ ...report, opis: event.target.value })
+                      }
                     />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="rodzajpojazdu">Rodzaj Pojazdu</label>
-                    <select
-                      className="form-control"
-                      id="rodzajpojazdu"
-                      name="rodzajpojazdu"
-                      value={rodzajpojazdu}
-                      onChange={(event) => {
-                        setRodzajPojazdu(
-                          (prevState) => (prevState = event.target.value)
-                        );
-                      }}
-                    >
-                      <option>Osobowy</option>
-                      <option>Dostawczy</option>
-                    </select>
                   </div>
                   <div className="m-0 text-center">
                     <button

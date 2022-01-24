@@ -22,7 +22,10 @@ function ReportsPage() {
       },
     })
       .then((res) => res.json())
-      .then((data) => setReportData(data));
+      .then((data) => setReportData(data))
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
   return (
     <Row>
