@@ -13,16 +13,18 @@ export const ChosePerson = (props) => {
     })
       .then((res) => res.json())
       .then((data) => setOsoby(() => data));
+    setChosenPerson(osoby[0]);
   }, []);
   const changePerson = (event) => {
-    console.log(chosenPerson);
     var selectedIndex = event.target.options.selectedIndex;
-    setChosenPerson(osoby[selectedIndex]);
-    //{osoby.map((o)=><option key={o.user_id}>{o.imie} {o.nazwisko}</option>)}
+    setChosenPerson(osoby[selectedIndex - 1]);
   };
   return (
     <p>
       <select onChange={changePerson}>
+        <option disabled selected>
+          Wybierz osobe
+        </option>
         {osoby.map((o) =>
           props.osoba !== null && o.id === props.osoba.id ? (
             <option key={o.user_id}>

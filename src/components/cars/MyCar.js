@@ -49,7 +49,6 @@ function MyCar() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setCarInfo({ ...carInfo, Osoba: data.osoba });
       });
     setAddOwner(false);
@@ -175,7 +174,9 @@ function MyCar() {
                   </button>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
-                  <p>{!addOwner && carInfo.Osoba.imie}</p>
+                  <p>
+                    {!addOwner && carInfo.Osoba !== null && carInfo.Osoba.imie}
+                  </p>
                   {addOwner && (
                     <ChosePerson osoba={carInfo.Osoba} submitChange={submit} />
                   )}
