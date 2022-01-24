@@ -2,6 +2,7 @@ import { Col, Row } from "react-bootstrap";
 import Sidebar from "../layout/Sidebar";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { ChosePerson } from "./ChosePerson";
 
 function MyCar() {
   const [carInfo, setCarInfo] = useState({
@@ -19,8 +20,9 @@ function MyCar() {
     vin: "",
     zdjecie: "",
   });
+  
   const params = useParams();
-
+  
   useEffect(() => {
     fetch(`http://localhost:8000/api/car/${params.id}`, {
       method: "GET",
@@ -32,6 +34,12 @@ function MyCar() {
       .then((res) => res.json())
       .then((data) => setCarInfo(() => data.data));
   }, []);
+  const [addOwner, setAddOwner] = useState(false);
+  const submit =(newOwner)=>{
+    //fetch
+    console.log(newOwner)
+    setAddOwner(false);
+  }
   return (
     <Row>
       <Col sm={3} className="sidebar-menu-container">
@@ -144,9 +152,11 @@ function MyCar() {
                   <p>
                     <strong>Przypisana osoba:</strong>
                   </p>
+                  <button onClick={()=>{setAddOwner(true)}}>{carInfo.Osoba?"Edytuj osobe" : "Przypisz osobe"}</button>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
-                  <p>{carInfo.Osoba}</p>
+                  <p>{!addOwner && carInfo.Osoba.imie}</p>
+                  {addOwner && <ChosePerson osoba={carInfo.Osoba} submitChange={submit}/>}
                 </Col>
                 <Col sm={3} md={0} lg={3} xl={3} />
                 <Col sm={3} md={0} lg={3} xl={3} />
