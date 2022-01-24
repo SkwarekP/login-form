@@ -10,6 +10,7 @@ import AddReport from "./components/Reports/AddReport";
 import Settings from "./pages/Settings";
 import MyCar from "./components/cars/MyCar";
 import UserContextProvider from "./store/user-context";
+import Exploatation from "./pages/Exploatation";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/Flota/Reports/AddReport" element={<AddReport />} />
           <Route path="/Flota/Settings" element={<Settings />} />
           <Route path="/Flota/MyCar/:id" element={<MyCar />} />
+          <Route path="/Flota/Eksploatation" element={<Exploatation />} />
         </Routes>
       </Layout>
     </UserContextProvider>
