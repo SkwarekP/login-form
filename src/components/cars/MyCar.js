@@ -36,16 +36,22 @@ function MyCar() {
   }, []);
   const [addOwner, setAddOwner] = useState(false);
   const submit = (newOwner) => {
-    // var id_osoby =
-    // fetch(`http://localhost:8000/api/car/${params.id}`, {
-    //   method: "PUT",
-    //   body:newOwner
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     token: localStorage.getItem("token"),
-    //   },
-    // })
-    console.log(newOwner);
+    const data = {
+      id_osoby: newOwner.user_id,
+    };
+    fetch(`http://localhost:8000/api/car/${params.id}`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+        token: localStorage.getItem("token"),
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setCarInfo({ ...carInfo, Osoba: data.osoba });
+      });
     setAddOwner(false);
   };
   return (
@@ -169,7 +175,7 @@ function MyCar() {
                   </button>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
-                  <p>{!addOwner && carInfo.Osoba}</p>
+                  <p>{!addOwner && carInfo.Osoba.imie}</p>
                   {addOwner && (
                     <ChosePerson osoba={carInfo.Osoba} submitChange={submit} />
                   )}
