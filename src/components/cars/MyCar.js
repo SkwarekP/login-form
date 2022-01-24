@@ -1,21 +1,36 @@
 import { Col, Row } from "react-bootstrap";
 import Sidebar from "../layout/Sidebar";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 function MyCar() {
-  const [carInfo, setCarInfo] = useState([]);
+  const [carInfo, setCarInfo] = useState({
+    Osoba: "",
+    createdAt: "",
+    databadania: "",
+    dataubezpieczenia: "",
+    id: null,
+    marka: "",
+    model: "",
+    nrrejestracyjny: "",
+    rodzajpaliwa: "",
+    rodzajpojazdu: "",
+    updatedAt: "",
+    vin: "",
+    zdjecie: "",
+  });
+  const params = useParams();
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/cars/", {
+    fetch(`http://localhost:8000/api/car/${params.id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        token: localStorage.getItem("token"),
       },
     })
       .then((res) => res.json())
-      .then((data) => {
-        setCarInfo((prev) => data);
-      });
+      .then((data) => setCarInfo(() => data.data));
   }, []);
   return (
     <Row>
@@ -43,7 +58,7 @@ function MyCar() {
                   </p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
-                  <p>fiat</p>
+                  <p>{carInfo.marka}</p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
                   <p>
@@ -51,7 +66,7 @@ function MyCar() {
                   </p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
-                  <p>osobowy</p>
+                  <p>{carInfo.rodzajpojazdu}</p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
                   <p>
@@ -59,7 +74,7 @@ function MyCar() {
                   </p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
-                  <p>Grande Punto</p>
+                  <p>{carInfo.model}</p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
                   <p>
@@ -67,7 +82,7 @@ function MyCar() {
                   </p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
-                  <p>Diesel</p>
+                  <p>{carInfo.rodzajpaliwa}</p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
                   <p>
@@ -75,7 +90,7 @@ function MyCar() {
                   </p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
-                  <p>SC1023ABS</p>
+                  <p>{carInfo.rodzajpojazdu}</p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
                   <p>
@@ -83,7 +98,7 @@ function MyCar() {
                   </p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
-                  <p>1.9 JTD</p>
+                  <p>Silnik !!!!</p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
                   <p>
@@ -91,7 +106,7 @@ function MyCar() {
                   </p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
-                  <p>1000DFGSAA421</p>
+                  <p>{carInfo.vin}</p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
                   <p>
@@ -99,7 +114,7 @@ function MyCar() {
                   </p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
-                  <p>260 000km</p>
+                  <p>przebieg</p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
                   <p>
@@ -107,7 +122,7 @@ function MyCar() {
                   </p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
-                  <p>10 dni</p>
+                  <p>{carInfo.databadania}</p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
                   <p>
@@ -115,7 +130,7 @@ function MyCar() {
                   </p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
-                  <p>10.10.2021</p>
+                  <p>{carInfo.dataubezpieczenia}</p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
                   <p>
@@ -131,7 +146,7 @@ function MyCar() {
                   </p>
                 </Col>
                 <Col sm={6} md={6} lg={3} xl={3}>
-                  <p>Jan Kowalski</p>
+                  <p>{carInfo.Osoba}</p>
                 </Col>
                 <Col sm={3} md={0} lg={3} xl={3} />
                 <Col sm={3} md={0} lg={3} xl={3} />
