@@ -36,7 +36,15 @@ function MyCar() {
   }, []);
   const [addOwner, setAddOwner] = useState(false);
   const submit =(newOwner)=>{
-    //fetch
+    // var id_osoby = 
+    // fetch(`http://localhost:8000/api/car/${params.id}`, {
+    //   method: "PUT",
+    //   body:newOwner
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     token: localStorage.getItem("token"),
+    //   },
+    // })
     console.log(newOwner)
     setAddOwner(false);
   }
@@ -197,6 +205,39 @@ function MyCar() {
                   </tbody>
                 </table>
               </div>
+            </Col>
+            <Col xs={12} className="as-box-rounded-white mt-3">
+              <Row>
+                <Col xs={3}>
+                  <h3>Statystyki</h3>
+                </Col>
+              </Row>
+              <Row className="single_cars_info">
+                <Col xs={12} lg={4} className="single_cars">
+                  <div className="single_car_info">
+                    <div>
+                      <span>500</span>
+                    </div>
+                    <p>Koszta Paliwa</p>
+                  </div>
+                </Col>
+                <Col xs={12} lg={4} className="single_cars">
+                  <div className="single_car_info">
+                    <div>
+                      <span>500</span>
+                    </div>
+                    <p>Wymiany</p>
+                  </div>
+                </Col>
+                <Col xs={12} lg={4} className="single_cars">
+                  <div className="single_car_info">
+                    <div>
+                      <span>1000</span>
+                    </div>
+                    <p>Łącznie</p>
+                  </div>
+                </Col>
+              </Row>
             </Col>
           </Row>
         </div>
