@@ -1,38 +1,56 @@
 import Sidebar from "../components/layout/Sidebar";
-import { Col, Row } from "react-bootstrap";
+import {Col, Row} from "react-bootstrap";
 import Logo from "../components/Logo";
-import { useState } from "react";
+import {useState} from "react";
 import TankForm from "../components/Exploatation/tankForm";
+import ExchangeForm from "../components/Exploatation/ExchangeForm";
 
 function Exploatation() {
-  const [tankForm, setTankForm] = useState(false);
-  const [exchangeForm, setExchangeForm] = useState(false);
+    const [tankForm, setTankForm] = useState(false);
+    const [exchangeForm, setExchangeForm] = useState(false);
 
-  return (
-    <Row>
-      <Col sm={3} className="sidebar-menu-container">
-        <Sidebar />
-      </Col>
-      <Col sm={9} className="page">
-        <div className="container-fluid">
-          <Row>
-            <Col sm={12} className="mt-3">
-              <div className="page-title">
-                <Logo />
-                <h1 className="m-2">Eksploatacja</h1>
-              </div>
+    const onUpdateCar = (data) => {
+        console.log(data);
+        fetch("http://localhost:8000/api/refuel", {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json",
+                token: localStorage.getItem("token")
+            }
+        }).then(res => console.log("wysłano", res))
+    }
+
+    return (
+        <Row>
+            <Col sm={3} className="sidebar-menu-container">
+                <Sidebar/>
             </Col>
-          </Row>
-          <button className="blue_button mt-2 btn-outline-info">
-            Dodaj tankowanie
-          </button>
-          <button className="blue_button m-lg-3 m-md-3 mt-2 btn-outline-info">
-            Dodaj wymiany
-          </button>
-          <TankForm />
-        </div>
-      </Col>
-    </Row>
-  );
+            <Col sm={9} className="page">
+                <div className="container-fluid">
+                    <Row>
+                        <Col sm={12} className="mt-3">
+                            <div className="page-title">
+                                <Logo/>
+                                <h1 className="m-2">Eksploatacja</h1>
+                            </div>
+                        </Col>
+                    </Row>
+
+                    <button className="blue_button mt-2 btn-outline-info"
+                            onClick={() => setTankForm((prev) => !prev)}>
+                        Dodaj tankowanie
+                    </button>
+                    <button className="blue_button m-lg-3 m-md-3 mt-2 btn-outline-info"
+                            onClick={() => setExchangeForm((prev) => !prev)}>
+                        Dodaj wymiany
+                    </button>
+                    {tankForm && <TankForm tankData={onUpdateCar}/>}
+                    {exchangeForm && <ExchangeForm/>}
+                </div>
+            </Col>
+        </Row>
+    );
 }
+
 export default Exploatation;

@@ -72,7 +72,3 @@ function MainPage() {
 
 export default MainPage;
 
-//@TODO Uzytkownicy, dodawanie uzytkownikow, CHECKED!
-//@TODO Raporty ---
-//@TODO single car ---
-//@TODO SETTINGS
