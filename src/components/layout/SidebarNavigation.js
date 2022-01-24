@@ -11,7 +11,7 @@ import LogoIcon from "../LogoIcon";
 
 function SidebarNavigation(props) {
   const [active, setActive] = useState(false);
-  const { setUser } = useContext(UserContext);
+  const { setUser, user } = useContext(UserContext);
 
   const logout = () => {
     setUser(() => {
@@ -44,12 +44,14 @@ function SidebarNavigation(props) {
             <p className="m-auto"> Zgłoszenia </p>
           </Link>
         </li>
-        <li className={classes.sidebarMenuItem}>
-          <Link to="/Flota/Users">
-            <PeopleAltOutlinedIcon />
-            <p className="m-auto"> Uzytkownicy</p>
-          </Link>
-        </li>
+        {user.type && (
+          <li className={classes.sidebarMenuItem}>
+            <Link to="/Flota/Users">
+              <PeopleAltOutlinedIcon />
+              <p className="m-auto"> Uzytkownicy</p>
+            </Link>
+          </li>
+        )}
         <li className={classes.sidebarMenuItem}>
           <Link to="/Flota/Settings">
             <SettingsAccessibilityOutlinedIcon />

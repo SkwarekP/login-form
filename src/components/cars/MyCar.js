@@ -1,10 +1,11 @@
 import { Col, Row } from "react-bootstrap";
 import Sidebar from "../layout/Sidebar";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { ChosePerson } from "./ChosePerson";
-
+import { UserContext } from "../../store/user-context";
 function MyCar() {
+  const { user } = useContext(UserContext);
   const [carInfo, setCarInfo] = useState({
     Osoba: "",
     createdAt: "",
@@ -40,13 +41,17 @@ function MyCar() {
       .then((res) => res.json())
       .then((data) => {
         setCarInfo(() => data.data);
-        setTankList(data.tankList);
-        setStats({
-          ...stats,
-          paliwo: data.tankList
-            .map((singleTank) => singleTank.kwota)
-            .reduce((a, b) => a + b),
-        });
+        console.log(data);
+        if (data.tankList !== []) {
+          setTankList(data.tankList);
+          setStats({
+            ...stats,
+            paliwo: data.tankList
+              .map((singleTank) => singleTank.kwota)
+              .reduce((a, b) => a + b),
+          });
+        } else {
+        }
       });
   }, []);
   const [addOwner, setAddOwner] = useState(false);
@@ -192,7 +197,7 @@ function MyCar() {
                   <p>
                     {!addOwner && carInfo.Osoba !== null && carInfo.Osoba.imie}
                   </p>
-                  {addOwner && (
+                  {user.type && addOwner && (
                     <ChosePerson osoba={carInfo.Osoba} submitChange={submit} />
                   )}
                 </Col>
