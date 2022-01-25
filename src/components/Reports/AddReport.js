@@ -1,5 +1,5 @@
 import {Card, Col, Container, Row} from "react-bootstrap";
-import Sidebar from "../layout/Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
 import {useState, useEffect} from "react";
 
 function AddReport() {
@@ -22,7 +22,7 @@ function AddReport() {
                 setCars(data);
                 setReport({...report, id_pojazdu: data[0].id});
             });
-    }, []);
+    }, [report]);
     const changeCar = (event) => {
         event.preventDefault();
         var selectedIndex = event.target.options.selectedIndex;

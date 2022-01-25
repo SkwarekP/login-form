@@ -1,5 +1,5 @@
 import { Col, Row } from "react-bootstrap";
-import Sidebar from "../components/layout/Sidebar";
+import Sidebar from "../components/Sidebar/Sidebar";
 import CardList from "../components/Cards/CardList";
 import "../style/style.css";
 import { useNavigate } from "react-router-dom";

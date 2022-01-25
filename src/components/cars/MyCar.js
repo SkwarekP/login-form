@@ -1,5 +1,5 @@
 import {Col, Row} from "react-bootstrap";
-import Sidebar from "../layout/Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
 import {useEffect, useState, useContext} from "react";
 import {useParams} from "react-router-dom";
 import {ChosePerson} from "./ChosePerson";

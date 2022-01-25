@@ -1,4 +1,4 @@
-import Login from "../src/pages/Login";
+import Login from "./components/Login/Login";
 import MainPage from "../src/pages/MainPage";
 import { Routes, Route } from "react-router-dom";
 import Layout from "../src/components/layout/Layout";

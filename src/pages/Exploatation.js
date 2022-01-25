@@ -1,4 +1,4 @@
-import Sidebar from "../components/layout/Sidebar";
+import Sidebar from "../components/Sidebar/Sidebar";
 import {Col, Row} from "react-bootstrap";
 import Logo from "../components/Logo";
 import {useState} from "react";

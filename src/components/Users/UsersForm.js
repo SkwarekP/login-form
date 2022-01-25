@@ -1,6 +1,6 @@
 import {useEffect, useReducer, useState} from "react";
 import {Row, Col, Container} from 'react-bootstrap';
-import Sidebar from "../layout/Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
 
 const emailReducer = (state, action) => {
     if (action.type === "EMAIL") {
@@ -41,12 +41,10 @@ function UsersForm() {
 
     useEffect(() => {
         const identifier = setTimeout(() => {
-            console.log("checking validation");
             setIsFormValid(emailState.isValid && nrtelState.isValid)
         }, 500)
 
         return () => {
-            console.log("cleanup")
             clearTimeout(identifier)
         }
     }, [emailState, nrtelState])

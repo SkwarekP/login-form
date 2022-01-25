@@ -1,7 +1,5 @@
 import {Col, Row} from "react-bootstrap";
-import Sidebar from "../components/layout/Sidebar";
-import Searchbox from "../components/Searchbox";
-import ReportsList from "../components/Reports/ReportsList";
+import Sidebar from "../components/Sidebar/Sidebar";
 import {useNavigate} from "react-router-dom";
 import Logo from "../components/Logo";
 import {useState, useEffect} from "react";

@@ -1,8 +1,6 @@
 import {Container, Row, Col, Card} from "react-bootstrap";
-import Sidebar from "../layout/Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
 import {useState, useEffect, useReducer} from "react";
-import MyCar from "./MyCar";
-import classes from "./NewWehicle.module.css";
 
 const modelReducer = (state, action) => {
     if (action.type === "MODEL") {

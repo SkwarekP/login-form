@@ -1,4 +1,4 @@
-import classes from './Layout.module.css'
+import classes from '../Sidebar/Layout.module.css'
 function Layout (props) {
 
     return(

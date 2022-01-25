@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom";
-import LoginForm from "../../src/components/layout/LoginForm";
+import LoginForm from "../layout/LoginForm";
 import {useContext} from "react";
-import {UserContext} from "../store/user-context";
+import {UserContext} from "../../store/user-context";
 
 function Login() {
     const navigate = useNavigate();
