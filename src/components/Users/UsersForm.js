@@ -175,7 +175,6 @@ function UsersForm() {
                                             <option>Administrator</option>
                                         </select>
                                     </div>
-                                    {formValidMessage}
                                     <div className="mt-5 text-center">
                                         <button
                                             type="submit"
@@ -185,6 +184,7 @@ function UsersForm() {
                                             Dodaj
                                         </button>
                                         {isCorrect && <p className="fadeOut mt-1">{correct}</p>}
+                                        {!isFormValid && <p className="inCorrect">{formValidMessage}</p>}
                                     </div>
                                 </Col>
                             </Row>

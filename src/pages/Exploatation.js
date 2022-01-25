@@ -3,11 +3,9 @@ import {Col, Row} from "react-bootstrap";
 import Logo from "../components/Logo";
 import {useState} from "react";
 import TankForm from "../components/Exploatation/tankForm";
-import ExchangeForm from "../components/Exploatation/ExchangeForm";
 
 function Exploatation() {
     const [tankForm, setTankForm] = useState(false);
-    const [exchangeForm, setExchangeForm] = useState(false);
 
     const onUpdateCar = (data) => {
         console.log(data);
@@ -41,12 +39,8 @@ function Exploatation() {
                             onClick={() => setTankForm((prev) => !prev)}>
                         Dodaj tankowanie
                     </button>
-                    <button className="blue_button m-lg-3 m-md-3 mt-2 btn-outline-info"
-                            onClick={() => setExchangeForm((prev) => !prev)}>
-                        Dodaj wymiany
-                    </button>
+
                     {tankForm && <TankForm tankData={onUpdateCar}/>}
-                    {exchangeForm && <ExchangeForm/>}
                 </div>
             </Col>
         </Row>

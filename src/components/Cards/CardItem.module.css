@@ -1,23 +1,28 @@
 .cardImgTop {
-  border-radius: 10px 10px 0px 0px !important;
+    border-radius: 10px 10px 0px 0px !important;
+    object-fit: cover;
+    max-height: 200px;
 }
+
 .cardBody {
-  padding: 0;
+    padding: 0;
 }
+
 .cardTitle {
-  text-align: center;
+    text-align: center;
 
-  background-color: #0db5c9;
+    background-color: #0db5c9;
 
-  font-size: 16px;
+    font-size: 16px;
 
-  color: white;
+    color: white;
 
-  padding: 10px;
+    padding: 10px;
 }
+
 .cardText {
-  padding: 10px 0 10px 0;
-  font-weight: bold;
-  text-align: center;
-  color: black;
+    padding: 10px 0 10px 0;
+    font-weight: bold;
+    text-align: center;
+    color: black;
 }
